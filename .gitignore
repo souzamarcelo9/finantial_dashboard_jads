@@ -1,0 +1,58 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.pnpm-store
+
+# build output
+/build
+/dist
+
+# testing
+/coverage
+
+# environment & secrets
+.env
+.env.*
+.mcp.json
+
+# editor
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# debug logs
+pnpm-debug.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# lock files from wrong package managers (project uses pnpm)
+package-lock.json
+yarn.lock
+
+# lint output
+lint-output.json
+
+# private data
+*.xlsx
+*.csv
+
+# misc
+.python-version
+*.tsbuildinfo
+.dockerignore
+.editorconfig
+.nvmrc
+.npmrc
+
+# Added for consistency
+.env.local
+.env.*.local
+*.log
+Thumbs.db
+node_modules/
+dist/
+.next/

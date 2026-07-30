@@ -1,0 +1,210 @@
+/**
+ * Cashback Calculations Module
+ *
+ * Formulas:
+ * 1. Total Cashback Earned = Sum of all income transactions in "Refund & Cashbacks" category
+ * 2. Cashback Shared = Sum of expenses + transfers out from "Cashback Shared" account
+ * 3. Actual Cashback = Total Cashback Earned - Cashback Shared
+ * 4. Cashback Rate = (Total Cashback Earned / Total Credit Card Spending) * 100
+ */
+
+import type { Transaction } from "../../../types";
+
+/**
+ * Calculate total cashback earned from all sources
+ * @param transactions - All transactions
+ * @returns Total cashback earned
+ */
+export const calculateTotalCashbackEarned = (transactions: Transaction[]): number => {
+  if (!transactions || transactions.length === 0) {
+    return 0;
+  }
+
+  // Cashback is income in "Refund & Cashbacks" category
+  const cashbackTransactions = transactions.filter(
+    (t) =>
+      t.category === "Refund & Cashbacks" &&
+      (t.type === "Income" || (t as any)["Income/Expense"] === "Income")
+  );
+
+  return cashbackTransactions.reduce((sum, t) => sum + Math.abs(Number(t.amount) || 0), 0);
+};
+
+/**
+ * Calculate cashback shared with others
+ * @param transactions - All transactions
+ * @returns Total cashback shared
+ */
+export const calculateCashbackShared = (transactions: Transaction[]): number => {
+  if (!transactions || transactions.length === 0) {
+    return 0;
+  }
+
+  // Cashback shared is tracked via "Cashback Shared" account
+  // Count expenses and transfers out
+  const cashbackSharedTransactions = transactions.filter(
+    (t) =>
+      t.account === "Cashback Shared" &&
+      (t.type === "Expense" ||
+        t.type === "Transfer-Out" ||
+        (t as any)["Income/Expense"] === "Exp." ||
+        (t as any)["Income/Expense"] === "Transfer-Out")
+  );
+
+  return cashbackSharedTransactions.reduce((sum, t) => sum + Math.abs(Number(t.amount) || 0), 0);
+};
+
+/**
+ * Calculate actual cashback (earned minus shared)
+ * @param transactions - All transactions
+ * @returns Actual cashback retained
+ */
+export const calculateActualCashback = (transactions: Transaction[]): number => {
+  const totalEarned = calculateTotalCashbackEarned(transactions);
+  const totalShared = calculateCashbackShared(transactions);
+  return totalEarned - totalShared;
+};
+
+interface CardCashbackData {
+  cashback: number;
+  spending: number;
+  rate: number;
+}
+
+/**
+ * Calculate cashback by credit card
+ * @param transactions - All transactions
+ * @returns Cashback breakdown by card
+ */
+export const calculateCashbackByCard = (
+  transactions: Transaction[]
+): Record<string, CardCashbackData> => {
+  if (!transactions || transactions.length === 0) {
+    return {};
+  }
+
+  const creditCardTransactions = transactions.filter((t) =>
+    t.account?.toLowerCase().includes("credit")
+  );
+
+  const cardAccounts = Array.from(new Set(creditCardTransactions.map((t) => t.account)));
+
+  const byCard: Record<
+    string,
+    {
+      cashback: number;
+      spending: number;
+      rate: number;
+      transactionCount: number;
+    }
+  > = {};
+
+  cardAccounts.forEach((card) => {
+    const cardTransactions = transactions.filter((t) => t.account === card);
+
+    const cashback = cardTransactions
+      .filter(
+        (t) =>
+          t.category === "Refund & Cashbacks" &&
+          (t.type === "Income" || (t as any)["Income/Expense"] === "Income")
+      )
+      .reduce((sum, t) => sum + Math.abs(Number(t.amount) || 0), 0);
+
+    const spending = cardTransactions
+      .filter((t) => t.type === "Expense" || (t as any)["Income/Expense"] === "Exp.")
+      .reduce((sum, t) => sum + Math.abs(Number(t.amount) || 0), 0);
+
+    const cashbackRate = spending > 0 ? (cashback / spending) * 100 : 0;
+
+    byCard[card] = {
+      cashback,
+      spending,
+      rate: cashbackRate,
+      transactionCount: cardTransactions.length,
+    };
+  });
+
+  return byCard;
+};
+
+/**
+ * Calculate comprehensive cashback metrics
+ * @param {Array} transactions - All transactions
+ * @returns {Object} Complete cashback analysis
+ */
+export const calculateCashbackMetrics = (transactions: Transaction[]) => {
+  if (!transactions || transactions.length === 0) {
+    return {
+      totalCashbackEarned: 0,
+      cashbackShared: 0,
+      actualCashback: 0,
+      cashbackRate: 0,
+      byCard: {},
+      insights: [],
+    };
+  }
+
+  const totalCashbackEarned = calculateTotalCashbackEarned(transactions);
+  const cashbackShared = calculateCashbackShared(transactions);
+  const actualCashback = calculateActualCashback(transactions);
+  const byCard = calculateCashbackByCard(transactions);
+
+  // Calculate overall cashback rate
+  const totalCreditCardSpending = Object.values(byCard).reduce(
+    (sum, card) => sum + card.spending,
+    0
+  );
+  const cashbackRate =
+    totalCreditCardSpending > 0 ? (totalCashbackEarned / totalCreditCardSpending) * 100 : 0;
+
+  // Generate insights
+  const insights = [];
+
+  if (totalCashbackEarned > 0) {
+    insights.push({
+      title: "Total Cashback Earned",
+      message: `R$${totalCashbackEarned.toLocaleString()} earned across all cards`,
+      priority: "positive",
+    });
+  }
+
+  if (cashbackShared > 0) {
+    const sharedPercent = (cashbackShared / totalCashbackEarned) * 100;
+    insights.push({
+      title: "Cashback Shared",
+      message: `R$${cashbackShared.toLocaleString()} shared (${sharedPercent.toFixed(1)}% of total)`,
+      priority: "neutral",
+    });
+  }
+
+  if (actualCashback > 0) {
+    insights.push({
+      title: "Actual Cashback Retained",
+      message: `R$${actualCashback.toLocaleString()} after sharing`,
+      priority: "positive",
+    });
+  }
+
+  if (cashbackRate > 0) {
+    insights.push({
+      title: "Cashback Rate",
+      message: `Earning ${cashbackRate.toFixed(2)}% back on credit card spending`,
+      priority: cashbackRate >= 2 ? "positive" : "neutral",
+    });
+  }
+
+  return {
+    totalCashbackEarned,
+    cashbackShared,
+    actualCashback,
+    cashbackRate,
+    byCard,
+    insights,
+    breakdown: Object.entries(byCard)
+      .map(([card, data]) => ({
+        card,
+        ...data,
+      }))
+      .sort((a, b) => b.cashback - a.cashback),
+  };
+};
