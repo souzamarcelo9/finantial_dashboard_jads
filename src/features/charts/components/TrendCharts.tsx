@@ -164,7 +164,7 @@ export const EnhancedMonthlyTrendsChart = ({
         labels: sortedMonths.map(formatMonthLabel),
         datasets: [
           {
-            label: "Income",
+            label: "Ganhos",
             data: sortedMonths.map((m) => monthly[m].income),
             borderColor: "#22c55e",
             backgroundColor: "#22c55e",
@@ -172,7 +172,7 @@ export const EnhancedMonthlyTrendsChart = ({
             fill: false,
           },
           {
-            label: "Expense",
+            label: "Gastos",
             data: sortedMonths.map((m) => monthly[m].expense),
             borderColor: "#ef4444",
             backgroundColor: "#ef4444",
@@ -226,10 +226,10 @@ export const EnhancedMonthlyTrendsChart = ({
       <div className="relative z-10 flex justify-between items-center mb-4">
         <div>
           <h3 className="text-2xl font-bold text-white group-hover:text-gray-100 transition-colors duration-300">
-            Monthly Trends
+            Tendências mensais
           </h3>
           <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300 text-sm">
-            Track your income and expense patterns over time
+            Acompanhe seus padrões de renda e despesas ao longo do tempo
           </p>
         </div>
         <button
@@ -274,13 +274,13 @@ export const EnhancedMonthlyTrendsChart = ({
             className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 border border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-lg [&>option]:bg-gray-800 [&>option]:text-white"
           >
             <option value="year" className="bg-gray-800 text-white">
-              Yearly View
+              Visão Anual
             </option>
             <option value="last-12-months" className="bg-gray-800 text-white">
-              Last 12 Months
+              Últimos 12 meses
             </option>
             <option value="all-time" className="bg-gray-800 text-white">
-              All Time
+              Todo o período
             </option>
           </select>
           <select
@@ -292,7 +292,7 @@ export const EnhancedMonthlyTrendsChart = ({
               Regular
             </option>
             <option value="cumulative" className="bg-gray-800 text-white">
-              Cumulative
+              Cumulativo
             </option>
           </select>
         </div>
@@ -323,7 +323,7 @@ export const EnhancedMonthlyTrendsChart = ({
               if (viewMode === "last-12-months") {
                 return "Últimos 12 Meses";
               }
-              return `Year ${currentYear}`;
+              return `Ano ${currentYear}`;
             })()}
           </div>
 
@@ -347,7 +347,7 @@ export const EnhancedMonthlyTrendsChart = ({
 
         <div className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors duration-300 px-3 py-1 bg-gradient-to-r from-gray-700/50 to-gray-800/50 rounded-lg">
           {timeFilteredData.filter((i) => i.type === "Income" || i.type === "Expense").length}{" "}
-          transactions
+          transações
         </div>
       </div>
 
@@ -358,8 +358,8 @@ export const EnhancedMonthlyTrendsChart = ({
           <div className="flex items-center justify-center h-full text-gray-400">
             <div className="text-center">
               <div className="text-4xl mb-2">📊</div>
-              <div>No data available</div>
-              <div className="text-sm">for the selected time period</div>
+              <div>Não há dados disponíveis</div>
+              <div className="text-sm">para o período selecionado</div>
             </div>
           </div>
         )}

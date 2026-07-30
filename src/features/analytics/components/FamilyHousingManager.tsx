@@ -101,15 +101,15 @@ export const FamilyHousingManager = ({ filteredData }: FamilyHousingManagerProps
     <div className="space-y-6">
       {/* Header */}
       <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl p-6 shadow-lg">
-        <h2 className="text-2xl font-bold text-white mb-2">👨‍👩‍👧 Family & Housing Manager</h2>
-        <p className="text-purple-100">Track family support and housing expenses</p>
+        <h2 className="text-2xl font-bold text-white mb-2">👨‍👩‍👧 Gerencia de Família e Habitação</h2>
+        <p className="text-purple-100">Acompanhe o gasto familiar e as despesas de moradia</p>
       </div>
 
       {/* Family Expenses Section */}
       <div>
         <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
           <Users className="text-purple-400" size={28} />
-          Family Expenses
+          Despesas Familiares
         </h3>
 
         {/* Family Metrics */}
@@ -117,7 +117,7 @@ export const FamilyHousingManager = ({ filteredData }: FamilyHousingManagerProps
           {/* Total Family Expense */}
           <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-6 shadow-lg">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-purple-100 text-sm font-medium">Total Family Expense</span>
+              <span className="text-purple-100 text-sm font-medium">Despesa total da família</span>
               <Users className="text-purple-200" size={24} />
             </div>
             <div className="text-3xl font-bold text-white">
@@ -126,13 +126,13 @@ export const FamilyHousingManager = ({ filteredData }: FamilyHousingManagerProps
                 maximumFractionDigits: 0,
               })}
             </div>
-            <div className="text-sm text-purple-100 mt-1">All-time total</div>
+            <div className="text-sm text-purple-100 mt-1">Todos os períodos total</div>
           </div>
 
           {/* Monthly Average */}
           <div className="bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl p-6 shadow-lg">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-pink-100 text-sm font-medium">Monthly Average</span>
+              <span className="text-pink-100 text-sm font-medium">Média Mensal</span>
               <Calendar className="text-pink-200" size={24} />
             </div>
             <div className="text-3xl font-bold text-white">
@@ -141,17 +141,17 @@ export const FamilyHousingManager = ({ filteredData }: FamilyHousingManagerProps
                 maximumFractionDigits: 0,
               })}
             </div>
-            <div className="text-sm text-pink-100 mt-1">Per month</div>
+            <div className="text-sm text-pink-100 mt-1">Por mês</div>
           </div>
 
           {/* Categories */}
           <div className="bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl p-6 shadow-lg">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-indigo-100 text-sm font-medium">Expense Categories</span>
+              <span className="text-indigo-100 text-sm font-medium">Categorias de despesas</span>
               <TrendingUp className="text-indigo-200" size={24} />
             </div>
             <div className="text-3xl font-bold text-white">{familyData.breakdown.length}</div>
-            <div className="text-sm text-indigo-100 mt-1">Different types</div>
+            <div className="text-sm text-indigo-100 mt-1">Tipos distintos</div>
           </div>
         </div>
 
@@ -200,7 +200,7 @@ export const FamilyHousingManager = ({ filteredData }: FamilyHousingManagerProps
       <div>
         <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
           <Home className="text-blue-400" size={28} />
-          Housing & Rent
+          Habitação e Aluguel
         </h3>
 
         {/* Housing Metrics */}
@@ -208,7 +208,7 @@ export const FamilyHousingManager = ({ filteredData }: FamilyHousingManagerProps
           {/* Total Housing */}
           <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-6 shadow-lg">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-blue-100 text-sm font-medium">Total Housing</span>
+              <span className="text-blue-100 text-sm font-medium">Total Habitação</span>
               <Home className="text-blue-200" size={24} />
             </div>
             <div className="text-3xl font-bold text-white">
@@ -222,7 +222,7 @@ export const FamilyHousingManager = ({ filteredData }: FamilyHousingManagerProps
           {/* Rent */}
           <div className="bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-xl p-6 shadow-lg">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-cyan-100 text-sm font-medium">Total Rent</span>
+              <span className="text-cyan-100 text-sm font-medium">Total Aluguel</span>
               <Calendar className="text-cyan-200" size={24} />
             </div>
             <div className="text-3xl font-bold text-white">
@@ -236,7 +236,7 @@ export const FamilyHousingManager = ({ filteredData }: FamilyHousingManagerProps
           {/* Utilities */}
           <div className="bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl p-6 shadow-lg">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-yellow-100 text-sm font-medium">Total Utilities</span>
+              <span className="text-yellow-100 text-sm font-medium">Total de serviços públicos</span>
               <Zap className="text-yellow-200" size={24} />
             </div>
             <div className="text-3xl font-bold text-white">
@@ -250,7 +250,7 @@ export const FamilyHousingManager = ({ filteredData }: FamilyHousingManagerProps
           {/* Monthly Rent Avg */}
           <div className="bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl p-6 shadow-lg">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-indigo-100 text-sm font-medium">Avg Rent/Month</span>
+              <span className="text-indigo-100 text-sm font-medium">Aluguel médio/mês</span>
               <TrendingUp className="text-indigo-200" size={24} />
             </div>
             <div className="text-3xl font-bold text-white">
@@ -265,7 +265,7 @@ export const FamilyHousingManager = ({ filteredData }: FamilyHousingManagerProps
         {/* Housing Trends */}
         {housingData.trends.length > 0 && (
           <div className="bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700 mb-6">
-            <h4 className="text-xl font-bold text-white mb-4">Housing Expenses Over Time</h4>
+            <h4 className="text-xl font-bold text-white mb-4">Despesas com moradia ao longo do tempo</h4>
             <div style={{ height: "300px" }}>
               <Line data={housingTrendsData} options={chartOptions} />
             </div>
@@ -275,7 +275,7 @@ export const FamilyHousingManager = ({ filteredData }: FamilyHousingManagerProps
         {/* Recent Rent Payments */}
         {housingData.rentPayments.length > 0 && (
           <div className="bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700 mb-6">
-            <h4 className="text-xl font-bold text-white mb-4">Recent Rent Payments</h4>
+            <h4 className="text-xl font-bold text-white mb-4">Pagamentos de Aluguel Recentes</h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {housingData.rentPayments.slice(0, 6).map((payment: any) => (
                 <div

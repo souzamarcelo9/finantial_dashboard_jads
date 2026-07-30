@@ -157,13 +157,13 @@ export const NeedsWantsSavings = ({ transactions }: NeedsWantsSavingsProps) => {
                 onClick={cancelEdit}
                 className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors"
               >
-                Cancel
+                Cancela
               </button>
               <button
                 onClick={saveAllocationChanges}
                 className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
               >
-                Save
+                Salvar
               </button>
             </>
           ) : (
@@ -171,7 +171,7 @@ export const NeedsWantsSavings = ({ transactions }: NeedsWantsSavingsProps) => {
               onClick={() => setEditMode(true)}
               className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
             >
-              Customize Allocation
+              Customizar alocação
             </button>
           )}
         </div>
@@ -212,14 +212,14 @@ export const NeedsWantsSavings = ({ transactions }: NeedsWantsSavingsProps) => {
                         <span className="text-gray-400 text-sm">%</span>
                       </div>
                     ) : (
-                      <p className="text-sm text-gray-400">Target: {customAllocation[key]}%</p>
+                      <p className="text-sm text-gray-400">Meta: {customAllocation[key]}%</p>
                     )}
                   </div>
                 </div>
                 <span
                   className={`px-2 py-1 rounded text-xs font-medium border ${getStatusBadge(data?.status || "good")}`}
                 >
-                  {data?.status === "good" ? "✓ On Track" : "⚠ Review"}
+                  {data?.status === "good" ? "✓ No caminho certo" : "⚠ Revisão"}
                 </span>
               </div>
 
@@ -229,10 +229,10 @@ export const NeedsWantsSavings = ({ transactions }: NeedsWantsSavingsProps) => {
                   {formatCurrency(percentage?.amount || 0)}
                 </div>
                 <div className="text-sm text-gray-400 mt-1">
-                  {formatPercentage((percentage?.percentage || 0) / 100)} of total spending
+                  {formatPercentage((percentage?.percentage || 0) / 100)} do total de gastos
                   {percentage?.percentageOfIncome && (
                     <span className="ml-2">
-                      • {formatPercentage((percentage.percentageOfIncome || 0) / 100)} of income
+                      • {formatPercentage((percentage.percentageOfIncome || 0) / 100)} dos ganhos
                     </span>
                   )}
                 </div>
@@ -256,7 +256,7 @@ export const NeedsWantsSavings = ({ transactions }: NeedsWantsSavingsProps) => {
                 </div>
                 <div className="text-xs text-gray-400">
                   {(data?.difference || 0) > 0 ? "+" : ""}
-                  {formatPercentage((data?.difference || 0) / 100)} vs target
+                  {formatPercentage((data?.difference || 0) / 100)} vs meta
                 </div>
               </div>
             </div>

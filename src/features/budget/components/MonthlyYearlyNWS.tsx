@@ -33,11 +33,18 @@ type PeriodItem = {
 };
 
 interface CategoryBarProps {
-  category: string;
+  category: NWSKey;
   amount: number;
   percentage: number;
   color: string;
 }
+
+/** Traduz a chave interna (needs/wants/savings) para o rótulo em português */
+const NWS_LABELS: Record<NWSKey, string> = {
+  needs: "Necessidades",
+  wants: "Desejos",
+  savings: "Poupança",
+};
 
 interface PeriodCardProps {
   item: PeriodItem;
@@ -56,7 +63,7 @@ interface MonthlyYearlyNWSProps {
 const CategoryBar = ({ category, amount, percentage, color }: CategoryBarProps) => (
   <div className="space-y-2">
     <div className="flex justify-between items-center">
-      <span className="text-sm text-gray-400 capitalize">{category}</span>
+      <span className="text-sm text-gray-400">{NWS_LABELS[category]}</span>
       <div className="text-right">
         <div className="text-white font-semibold">{formatCurrency(amount, false)}</div>
         <div className="text-xs text-gray-500">{formatPercentage(percentage / 100)}</div>
@@ -107,12 +114,12 @@ const PeriodCard = ({ item, isSelected, onSelect, viewMode }: PeriodCardProps) =
       <div className="flex justify-between items-start mb-3">
         <div>
           <h4 className="text-lg font-semibold text-white">{periodLabel}</h4>
-          <p className="text-sm text-gray-400">{formatCurrency(total)} spent</p>
+          <p className="text-sm text-gray-400">{formatCurrency(total)} gasto</p>
         </div>
         {item.income > 0 && (
           <div className="text-right">
             <div className="text-sm text-green-400">{formatCurrency(item.income)}</div>
-            <div className="text-xs text-gray-500">income</div>
+            <div className="text-xs text-gray-500">ganho</div>
           </div>
         )}
       </div>
@@ -270,7 +277,7 @@ export const MonthlyYearlyNWS = ({ transactions }: MonthlyYearlyNWSProps) => {
     return (
       <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700">
         <div className="text-center text-gray-400">
-          <p>No transaction data available</p>
+          <p>Nenhum lançamento disponível</p>
         </div>
       </div>
     );
@@ -281,7 +288,7 @@ export const MonthlyYearlyNWS = ({ transactions }: MonthlyYearlyNWSProps) => {
       {/* Header with View Toggle */}
       <div className="flex justify-between items-center">
         <div>
-          <h3 className="text-2xl font-bold text-white">📊 Period Analysis</h3>
+          <h3 className="text-2xl font-bold text-white">📊 Análise por Período</h3>
           <p className="text-gray-400 mt-1">Acompanhe suas Necessidades/Desejos/Poupança ao longo do tempo</p>
         </div>
         <div className="flex gap-2 bg-gray-800 rounded-lg p-1 border border-gray-700">
@@ -294,7 +301,7 @@ export const MonthlyYearlyNWS = ({ transactions }: MonthlyYearlyNWSProps) => {
               viewMode === "monthly" ? "bg-blue-600 text-white" : "text-gray-400 hover:text-white"
             }`}
           >
-            Monthly
+            Mensal
           </button>
           <button
             onClick={() => {
@@ -305,7 +312,7 @@ export const MonthlyYearlyNWS = ({ transactions }: MonthlyYearlyNWSProps) => {
               viewMode === "yearly" ? "bg-blue-600 text-white" : "text-gray-400 hover:text-white"
             }`}
           >
-            Yearly
+            Anual
           </button>
         </div>
       </div>
@@ -325,7 +332,7 @@ export const MonthlyYearlyNWS = ({ transactions }: MonthlyYearlyNWSProps) => {
             ))
           ) : (
             <div className="bg-gray-800/50 rounded-lg p-6 border border-gray-700 text-center text-gray-400">
-              No data available for {viewMode} view
+              Nenhum dado disponível para a visão {viewMode === "monthly" ? "mensal" : "anual"}
             </div>
           )}
         </div>
@@ -403,7 +410,7 @@ export const MonthlyYearlyNWS = ({ transactions }: MonthlyYearlyNWSProps) => {
                           (selectedData.percentages.needs.percentageOfIncome || 0) / 100
                         )}
                       </div>
-                      <div className="text-xs text-gray-500">Target: 50%</div>
+                      <div className="text-xs text-gray-500">Meta: 50%</div>
                     </div>
                     <div>
                       <div className="text-sm text-gray-400 mb-1">Desejos</div>
@@ -412,7 +419,7 @@ export const MonthlyYearlyNWS = ({ transactions }: MonthlyYearlyNWSProps) => {
                           (selectedData.percentages.wants.percentageOfIncome || 0) / 100
                         )}
                       </div>
-                      <div className="text-xs text-gray-500">Target: 30%</div>
+                      <div className="text-xs text-gray-500">Meta: 30%</div>
                     </div>
                     <div>
                       <div className="text-sm text-gray-400 mb-1">Poupança</div>
@@ -421,7 +428,7 @@ export const MonthlyYearlyNWS = ({ transactions }: MonthlyYearlyNWSProps) => {
                           (selectedData.percentages.savings.percentageOfIncome || 0) / 100
                         )}
                       </div>
-                      <div className="text-xs text-gray-500">Target: 20%</div>
+                      <div className="text-xs text-gray-500">Meta: 20%</div>
                     </div>
                   </div>
                 </div>
@@ -446,7 +453,7 @@ export const MonthlyYearlyNWS = ({ transactions }: MonthlyYearlyNWSProps) => {
                       <div key={type} className="p-4 bg-gray-800 rounded-lg">
                         <h6 className="text-sm font-medium text-gray-300 mb-3 flex items-center gap-2">
                           <span>{icons[type]}</span>
-                          <span className="capitalize">{type}</span>
+                          <span>{NWS_LABELS[type]}</span>
                         </h6>
                         <div className="space-y-2">
                           {categories.length > 0 ? (
@@ -473,10 +480,10 @@ export const MonthlyYearlyNWS = ({ transactions }: MonthlyYearlyNWSProps) => {
               <div className="text-center text-gray-400">
                 <div className="text-4xl mb-4">📊</div>
                 <p className="text-lg">
-                  Select a {viewMode === "monthly" ? "month" : "year"} to view details
+                  Selecione {viewMode === "monthly" ? "um mês" : "um ano"} para ver detalhes
                 </p>
                 <p className="text-sm mt-2">
-                  Click on any period card to see the detailed breakdown
+                  Clique em qualquer cartão de período para ver o detalhamento
                 </p>
               </div>
             </div>

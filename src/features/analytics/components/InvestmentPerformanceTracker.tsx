@@ -19,7 +19,7 @@ interface InvestmentPerformanceTrackerProps {
 }
 
 /**
- * Investment Performance Tracker
+ * Acompanhamento de Desempenho de Investimentos
  * Track stock market performance, P&L, brokerage fees
  */
 
@@ -86,9 +86,9 @@ export const InvestmentPerformanceTracker = ({
             <TrendingUp className="text-purple-300" size={32} />
           </div>
           <div>
-            <h2 className="text-3xl font-bold gradient-text">Investment Performance Tracker</h2>
+            <h2 className="text-3xl font-bold gradient-text">Acompanhamento de Desempenho de Investimentos</h2>
             <p className="text-gray-300 text-sm mt-1">
-              Track your stock market performance, P&L, and brokerage fees
+              Acompanhe o desempenho dos seus investimentos, resultado (P&L) e taxas de corretagem
             </p>
           </div>
         </div>
@@ -96,13 +96,13 @@ export const InvestmentPerformanceTracker = ({
 
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-        {/* Total Capital Deployed */}
+        {/* Capital Total Aplicado */}
         <div className="glass border border-blue-500/30 rounded-2xl p-6 shadow-xl card-hover group relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-blue-500/5"></div>
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-3">
               <span className="text-gray-300 text-sm font-bold uppercase tracking-wide">
-                Total Capital Deployed
+                Capital Total Aplicado
               </span>
               <DollarSign
                 className="text-blue-400 group-hover:scale-110 transition-transform duration-300"
@@ -115,17 +115,17 @@ export const InvestmentPerformanceTracker = ({
                 maximumFractionDigits: 0,
               })}
             </div>
-            <div className="text-xs font-semibold text-blue-300/80">All-time deposits</div>
+            <div className="text-xs font-semibold text-blue-300/80">Depósitos totais</div>
           </div>
         </div>
 
-        {/* Realized Profits */}
+        {/* Lucros Realizados */}
         <div className="glass border border-green-500/30 rounded-2xl p-6 shadow-xl card-hover group relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-green-600/10 to-green-500/5"></div>
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-3">
               <span className="text-gray-300 text-sm font-bold uppercase tracking-wide">
-                Realized Profits
+                Lucros Realizados
               </span>
               <TrendingUp
                 className="text-green-400 group-hover:scale-110 transition-transform duration-300"
@@ -141,13 +141,13 @@ export const InvestmentPerformanceTracker = ({
           </div>
         </div>
 
-        {/* Realized Losses */}
+        {/* Prejuízos Realizados */}
         <div className="glass border border-red-500/30 rounded-2xl p-6 shadow-xl card-hover group relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-red-600/10 to-red-500/5"></div>
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-3">
               <span className="text-gray-300 text-sm font-bold uppercase tracking-wide">
-                Realized Losses
+                Prejuízos Realizados
               </span>
               <TrendingDown
                 className="text-red-400 group-hover:scale-110 transition-transform duration-300"
@@ -199,7 +199,7 @@ export const InvestmentPerformanceTracker = ({
               className={`text-sm font-bold ${netProfitLoss >= 0 ? "text-emerald-300" : "text-orange-300"}`}
             >
               {returnPercentage >= 0 ? "+" : ""}
-              {returnPercentage.toFixed(2)}% Return
+              {returnPercentage.toFixed(2)}% Retorno
             </div>
           </div>
         </div>
@@ -207,11 +207,11 @@ export const InvestmentPerformanceTracker = ({
 
       {/* Additional Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-        {/* Brokerage Fees */}
+        {/* Taxas de Corretagem */}
         <div className="glass border border-yellow-500/30 rounded-2xl p-6 shadow-xl card-hover group">
           <div className="flex items-center justify-between mb-3">
             <span className="text-gray-300 text-sm font-bold uppercase tracking-wide">
-              Brokerage Fees
+              Taxas de Corretagem
             </span>
             <CreditCard
               className="text-yellow-400 group-hover:rotate-6 transition-transform duration-300"
@@ -235,7 +235,7 @@ export const InvestmentPerformanceTracker = ({
         <div className="glass border border-blue-500/30 rounded-2xl p-6 shadow-xl card-hover group">
           <div className="flex items-center justify-between mb-3">
             <span className="text-gray-300 text-sm font-bold uppercase tracking-wide">
-              Total Withdrawals
+              Total de Retiradas
             </span>
             <DollarSign
               className="text-blue-400 group-hover:rotate-6 transition-transform duration-300"
@@ -250,11 +250,11 @@ export const InvestmentPerformanceTracker = ({
           </div>
         </div>
 
-        {/* Current Holdings */}
+        {/* Posição Atual */}
         <div className="glass border border-indigo-500/30 rounded-2xl p-6 shadow-xl card-hover group">
           <div className="flex items-center justify-between mb-3">
             <span className="text-gray-300 text-sm font-bold uppercase tracking-wide">
-              Current Holdings
+              Posição Atual
             </span>
             <TrendingUp
               className="text-indigo-400 group-hover:rotate-6 transition-transform duration-300"
@@ -279,7 +279,7 @@ export const InvestmentPerformanceTracker = ({
         <div className="glass border border-purple-500/30 rounded-2xl p-6 shadow-xl card-hover group">
           <div className="flex items-center justify-between mb-3">
             <span className="text-gray-300 text-sm font-bold uppercase tracking-wide">
-              Profit/Loss Ratio
+              Relação Lucro/Prejuízo
             </span>
             <TrendingUp
               className="text-purple-400 group-hover:rotate-6 transition-transform duration-300"
@@ -300,7 +300,7 @@ export const InvestmentPerformanceTracker = ({
       {/* P&L Chart */}
       {chartData.labels.length > 0 && (
         <div className="glass border border-gray-700/30 rounded-2xl p-7 shadow-2xl card-hover">
-          <h3 className="text-2xl font-bold gradient-text mb-6">Cumulative P&L Over Time</h3>
+          <h3 className="text-2xl font-bold gradient-text mb-6">Resultado (P&L) Acumulado ao Longo do Tempo</h3>
           <div style={{ height: "350px" }}>
             <Line data={chartData} options={chartOptions} />
           </div>
@@ -309,22 +309,22 @@ export const InvestmentPerformanceTracker = ({
 
       {/* Recent Transactions */}
       <div className="glass border border-gray-700/30 rounded-2xl p-7 shadow-2xl">
-        <h3 className="text-2xl font-bold gradient-text mb-6">Recent Investment Transactions</h3>
+        <h3 className="text-2xl font-bold gradient-text mb-6">Lançamentos de Investimento Recentes</h3>
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
               <tr className="border-b-2 border-blue-500/30">
                 <th className="text-left text-gray-300 font-bold uppercase tracking-wide py-4 px-5 text-xs">
-                  Date
+                  Data
                 </th>
                 <th className="text-left text-gray-300 font-bold uppercase tracking-wide py-4 px-5 text-xs">
-                  Type
+                  Tipo
                 </th>
                 <th className="text-left text-gray-300 font-bold uppercase tracking-wide py-4 px-5 text-xs">
-                  Category
+                  Categoria
                 </th>
                 <th className="text-right text-gray-300 font-bold uppercase tracking-wide py-4 px-5 text-xs">
-                  Amount
+                  Valor
                 </th>
               </tr>
             </thead>
@@ -401,18 +401,18 @@ export const InvestmentPerformanceTracker = ({
       {/* Insights & Recommendations */}
       <div className="glass border border-purple-500/30 rounded-2xl p-7 shadow-2xl bg-gradient-to-br from-purple-900/20 via-indigo-900/20 to-blue-900/20">
         <h3 className="text-2xl font-bold gradient-text mb-6 flex items-center gap-3">
-          <span className="text-3xl">💡</span> Investment Insights
+          <span className="text-3xl">💡</span> Insights de Investimento
         </h3>
         <div className="space-y-4">
           {netProfitLoss < 0 && (
             <div className="flex items-start gap-4 glass bg-red-900/20 border border-red-500/30 rounded-xl p-5 animate-fade-in">
               <AlertTriangle className="text-red-400 mt-1 flex-shrink-0" size={24} />
               <div>
-                <p className="text-red-300 font-bold text-lg">Net Loss Position</p>
+                <p className="text-red-300 font-bold text-lg">Posição de Prejuízo Líquido</p>
                 <p className="text-red-200/90 text-sm mt-2 leading-relaxed">
-                  Your investments are currently at a net loss of R$
-                  {Math.abs(netProfitLoss).toLocaleString("pt-BR")}. Consider reviewing your
-                  strategy and diversifying your portfolio.
+                  Seus investimentos estão atualmente com prejuízo líquido de R$
+                  {Math.abs(netProfitLoss).toLocaleString("pt-BR")}. Considere revisar sua
+                  estratégia e diversificar sua carteira.
                 </p>
               </div>
             </div>
@@ -422,11 +422,11 @@ export const InvestmentPerformanceTracker = ({
             <div className="flex items-start gap-4 glass bg-yellow-900/20 border border-yellow-500/30 rounded-xl p-5 animate-fade-in">
               <AlertTriangle className="text-yellow-400 mt-1 flex-shrink-0" size={24} />
               <div>
-                <p className="text-yellow-300 font-bold text-lg">High Brokerage Fees</p>
+                <p className="text-yellow-300 font-bold text-lg">Taxas de Corretagem Elevadas</p>
                 <p className="text-yellow-200/90 text-sm mt-2 leading-relaxed">
-                  Brokerage fees are eating up{" "}
-                  {((brokerageFees / realizedProfits) * 100).toFixed(0)}% of your profits. Consider
-                  switching to a discount broker or reducing trade frequency.
+                  As taxas de corretagem estão consumindo{" "}
+                  {((brokerageFees / realizedProfits) * 100).toFixed(0)}% dos seus lucros. Considere
+                  trocar para uma corretora com taxas menores ou reduzir a frequência de operações.
                 </p>
               </div>
             </div>
@@ -436,10 +436,10 @@ export const InvestmentPerformanceTracker = ({
             <div className="flex items-start gap-4 glass bg-green-900/20 border border-green-500/30 rounded-xl p-5 animate-fade-in">
               <CheckCircle className="text-green-400 mt-1 flex-shrink-0" size={24} />
               <div>
-                <p className="text-green-300 font-bold text-lg">Profitable Trading</p>
+                <p className="text-green-300 font-bold text-lg">Operações Lucrativas</p>
                 <p className="text-green-200/90 text-sm mt-2 leading-relaxed">
-                  Great job! You've made a {returnPercentage.toFixed(2)}% return on your
-                  investments. Keep maintaining your winning strategy.
+                  Muito bem! Você teve um retorno de {returnPercentage.toFixed(2)}% nos seus
+                  investimentos. Continue mantendo sua estratégia vencedora.
                 </p>
               </div>
             </div>
@@ -449,10 +449,10 @@ export const InvestmentPerformanceTracker = ({
             <div className="flex items-start gap-4 glass bg-blue-900/20 border border-blue-500/30 rounded-xl p-5 animate-fade-in">
               <AlertTriangle className="text-blue-400 mt-1 flex-shrink-0" size={24} />
               <div>
-                <p className="text-blue-300 font-bold text-lg">Tax Loss Harvesting Opportunity</p>
+                <p className="text-blue-300 font-bold text-lg">Oportunidade de Compensação de Prejuízos no IR</p>
                 <p className="text-blue-200/90 text-sm mt-2 leading-relaxed">
-                  You have realized losses that can offset your gains for tax purposes. Consult with
-                  a tax advisor to optimize your tax liability.
+                  Você tem prejuízos realizados que podem compensar seus ganhos para fins de Imposto de
+                  Renda. Consulte um(a) contador(a) para otimizar seu imposto devido.
                 </p>
               </div>
             </div>

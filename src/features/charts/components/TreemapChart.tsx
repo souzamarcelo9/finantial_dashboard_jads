@@ -342,8 +342,8 @@ export const TreemapChart = ({ filteredData, chartRef }: TreemapChartProps) => {
           const displayName = showSubcategories ? d.data.fullName : d.data.name;
           tooltip.style("visibility", "visible").html(`
             <strong>${escapeHtml(String(displayName))}</strong><br/>
-            Amount: ${formatCurrency(d.data.value)}<br/>
-            ${((d.data.value / root.value) * 100).toFixed(1)}% of total
+            Montante: ${formatCurrency(d.data.value)}<br/>
+            ${((d.data.value / root.value) * 100).toFixed(1)}% do total
           `);
         })
         .on("mousemove", (event: any) => {
@@ -419,7 +419,7 @@ export const TreemapChart = ({ filteredData, chartRef }: TreemapChartProps) => {
   return (
     <div className="lg:col-span-2 bg-gray-800 p-6 rounded-2xl shadow-lg h-[600px] flex flex-col">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-xl font-semibold text-white">Expense Breakdown Treemap</h3>
+        <h3 className="text-xl font-semibold text-white">Mapa de árvore de detalhamento de despesas</h3>
         <button
           onClick={() => {
             if (chartRef?.current) {
@@ -464,9 +464,9 @@ export const TreemapChart = ({ filteredData, chartRef }: TreemapChartProps) => {
             onChange={(e) => setViewMode(e.target.value)}
             className="bg-green-600 hover:bg-green-700 text-white px-2 py-1 rounded text-sm transition-colors border-none focus:outline-none focus:ring-2 focus:ring-green-500"
           >
-            <option value="month">Monthly View</option>
-            <option value="year">Yearly View</option>
-            <option value="all-time">All Time</option>
+            <option value="month">Mensal</option>
+            <option value="year">Anual</option>
+            <option value="all-time">Todos</option>
           </select>
 
           <label className="flex items-center text-white text-sm">
@@ -476,7 +476,7 @@ export const TreemapChart = ({ filteredData, chartRef }: TreemapChartProps) => {
               onChange={(e) => setShowSubcategories(e.target.checked)}
               className="mr-1"
             />{" "}
-            Subcategories
+            Subcategorias
           </label>
         </div>
 
@@ -528,7 +528,7 @@ export const TreemapChart = ({ filteredData, chartRef }: TreemapChartProps) => {
           </button>
         </div>
 
-        <div className="text-xs text-gray-400">{timeFilteredData.length} expenses</div>
+        <div className="text-xs text-gray-400">{timeFilteredData.length} gastos</div>
       </div>
 
       {/* Treemap Container */}
@@ -541,15 +541,15 @@ export const TreemapChart = ({ filteredData, chartRef }: TreemapChartProps) => {
           <div className="flex items-center justify-center h-full text-gray-400">
             <div className="text-center">
               <div className="text-4xl mb-2">📊</div>
-              <div>No expense data available</div>
-              <div className="text-sm">for the selected period</div>
+              <div>Nenhum dado de gasto disponível</div>
+              <div className="text-sm">para o período selecionado</div>
             </div>
           </div>
         )}
       </div>
 
       <div className="mt-2 text-xs text-gray-600">
-        <p className="mb-1">Rectangle size = expense amount. Hover for details.</p>
+        <p className="mb-1">Tamanho do retângulo = valor da despesa. Passe o mouse para obter detalhes.</p>
         <div className="text-xs text-gray-500">
           {showSubcategories
             ? "Mostrando subcategorias dentro das categorias principais"

@@ -82,17 +82,17 @@ export const SmartInsightsPanel = ({ filteredData, budgets = {} }: SmartInsights
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
           <AlertCircle className="text-blue-400" size={24} />
-          <h3 className="text-xl font-semibold text-white">Smart Insights & Alerts</h3>
+          <h3 className="text-xl font-semibold text-white">Insights inteligentes e alertas</h3>
         </div>
         <div className="flex gap-2 text-xs">
           <span className="px-2 py-1 rounded-full bg-red-500/20 text-red-300">
-            {highPriorityInsights.length} High
+            {highPriorityInsights.length} Alto
           </span>
           <span className="px-2 py-1 rounded-full bg-yellow-500/20 text-yellow-300">
-            {mediumPriorityInsights.length} Medium
+            {mediumPriorityInsights.length} Médio
           </span>
           <span className="px-2 py-1 rounded-full bg-blue-500/20 text-blue-300">
-            {lowPriorityInsights.length} Low
+            {lowPriorityInsights.length} Baixo
           </span>
         </div>
       </div>
@@ -102,7 +102,7 @@ export const SmartInsightsPanel = ({ filteredData, budgets = {} }: SmartInsights
         {highPriorityInsights.length > 0 && (
           <div>
             <h4 className="text-sm font-semibold text-red-400 mb-2 uppercase tracking-wide">
-              ⚠️ Urgent Attention
+              ⚠️ Atenção Urgente
             </h4>
             {highPriorityInsights.map((insight: Insight, idx: number) => (
               <div
@@ -131,7 +131,7 @@ export const SmartInsightsPanel = ({ filteredData, budgets = {} }: SmartInsights
         {mediumPriorityInsights.length > 0 && (
           <div>
             <h4 className="text-sm font-semibold text-yellow-400 mb-2 uppercase tracking-wide">
-              📊 Worth Monitoring
+              📊 Vale a pena monitorar
             </h4>
             {mediumPriorityInsights.map((insight: Insight, idx: number) => (
               <div
@@ -146,7 +146,7 @@ export const SmartInsightsPanel = ({ filteredData, budgets = {} }: SmartInsights
                     {insight.action && (
                       <div className="flex items-center gap-2 text-xs text-blue-400">
                         <Info size={14} />
-                        <span className="font-medium">Suggestion: {insight.action}</span>
+                        <span className="font-medium">Sugestão: {insight.action}</span>
                       </div>
                     )}
                   </div>
@@ -190,17 +190,17 @@ export const SmartInsightsPanel = ({ filteredData, budgets = {} }: SmartInsights
       {insights.dayPatterns && (
         <div className="mt-4 pt-4 border-t border-gray-700">
           <h4 className="text-sm font-semibold text-gray-400 mb-2 uppercase tracking-wide">
-            📈 Spending Patterns
+            📈 Padrão de Gastos
           </h4>
           <div className="grid grid-cols-2 gap-2 text-xs">
             <div className="bg-gray-700/50 rounded-lg p-2">
-              <p className="text-gray-400">Weekend Avg</p>
+              <p className="text-gray-400">Média fim de semana</p>
               <p className="text-white font-semibold">
                 R${insights.dayPatterns.weekendAvg?.toLocaleString() || 0}
               </p>
             </div>
             <div className="bg-gray-700/50 rounded-lg p-2">
-              <p className="text-gray-400">Weekday Avg</p>
+              <p className="text-gray-400">Média dia da semana</p>
               <p className="text-white font-semibold">
                 R${insights.dayPatterns.weekdayAvg?.toLocaleString() || 0}
               </p>

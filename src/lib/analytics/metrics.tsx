@@ -202,7 +202,7 @@ export const getMonthlyTrendDisplay = (monthlyComparison: {
   avgGrowth?: number;
 }) => {
   if (!monthlyComparison?.trend || monthlyComparison.avgGrowth === undefined) {
-    return "No trend data";
+    return "Nenhum dado de tendência";
   }
   if (monthlyComparison.trend === "increasing") {
     return `↗️ +${monthlyComparison.avgGrowth.toFixed(1)}% MoM`;
@@ -210,7 +210,7 @@ export const getMonthlyTrendDisplay = (monthlyComparison: {
   if (monthlyComparison.trend === "decreasing") {
     return `↘️ ${monthlyComparison.avgGrowth.toFixed(1)}% MoM`;
   }
-  return `➡️ Stable (${monthlyComparison.avgGrowth.toFixed(1)}% MoM)`;
+  return `➡️ Estável (${monthlyComparison.avgGrowth.toFixed(1)}% MoM)`;
 };
 
 /**
@@ -223,7 +223,7 @@ export const getAnomalyAlertDisplay = (anomaliesCount: number) => {
     const plural = anomaliesCount > 1 ? "s" : "";
     return `${anomaliesCount} unusual transaction${plural}`;
   }
-  return "✓ All normal";
+  return "✓ Tudo ok";
 };
 
 /**
@@ -237,14 +237,14 @@ export const getSubscriptionsDisplay = (
   formatCurrency: (amount: number) => string
 ) => {
   if (!recurringTransactions || recurringTransactions.length === 0) {
-    return "None detected";
+    return "Nenhuma detectada";
   }
 
   // Filter only active subscriptions
   const activeSubscriptions = recurringTransactions.filter((t) => t.isActive);
 
   if (activeSubscriptions.length === 0) {
-    return "None active";
+    return "Nenhuma ativada";
   }
 
   // Calculate total monthly cost using monthlyEquivalent

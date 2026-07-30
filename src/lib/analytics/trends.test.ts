@@ -55,7 +55,7 @@ describe("Analytics - Trends", () => {
       const result = analyzeDayOfWeekPatterns(transactions);
 
       expect(result?.insights).toBeDefined();
-      const weekendInsight = result?.insights.find((i) => i.title.includes("Weekend"));
+      const weekendInsight = result?.insights.find((i) => i.title.includes("Fim de Semana"));
       expect(weekendInsight).toBeDefined();
       expect(weekendInsight?.priority).toBe("high");
     });

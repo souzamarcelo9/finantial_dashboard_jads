@@ -91,7 +91,7 @@ export const useTimeNavigation = (data: GenericDataItem[], initialViewMode: stri
       return "Todo o Período";
     }
     if (viewMode === "year") {
-      return `Year ${currentYear}`;
+      return `Ano ${currentYear}`;
     }
     return `${monthNames[currentMonth - 1]} ${currentYear}`;
   };

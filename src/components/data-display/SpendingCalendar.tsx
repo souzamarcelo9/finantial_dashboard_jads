@@ -111,7 +111,7 @@ export const SpendingCalendar = ({ filteredData }: SpendingCalendarProps) => {
   };
 
   const getDayName = (dateStr: string): string => {
-    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const days = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
     return days[new Date(dateStr).getDay()];
   };
 
@@ -126,11 +126,11 @@ export const SpendingCalendar = ({ filteredData }: SpendingCalendarProps) => {
     <div>
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h2 className="text-2xl font-bold text-white">📅 Spending Calendar</h2>
-          <p className="text-gray-400 mt-1">Last 30 days spending patterns</p>
+          <h2 className="text-2xl font-bold text-white">📅 Calendário de Gastos</h2>
+          <p className="text-gray-400 mt-1">Padrões de gastos dos últimos 30 dias</p>
         </div>
         <div className="text-right">
-          <p className="text-gray-400 text-sm">Daily Average</p>
+          <p className="text-gray-400 text-sm">Média Diária</p>
           <p className="text-xl font-bold text-white">
             R${(avgSpending || 0).toFixed(0).toLocaleString()}
           </p>
@@ -139,7 +139,7 @@ export const SpendingCalendar = ({ filteredData }: SpendingCalendarProps) => {
 
       {/* Legend */}
       <div className="flex items-center gap-4 mb-6">
-        <span className="text-gray-400 text-sm">Less</span>
+        <span className="text-gray-400 text-sm">Menos</span>
         <div className="flex gap-1">
           <div className="w-6 h-6 bg-gray-800 border border-gray-700 rounded" />
           <div className="w-6 h-6 bg-green-600 border border-green-500 rounded" />
@@ -147,7 +147,7 @@ export const SpendingCalendar = ({ filteredData }: SpendingCalendarProps) => {
           <div className="w-6 h-6 bg-orange-600 border border-orange-500 rounded" />
           <div className="w-6 h-6 bg-red-600 border border-red-500 rounded" />
         </div>
-        <span className="text-gray-400 text-sm">More</span>
+        <span className="text-gray-400 text-sm">Mais</span>
       </div>
 
       {/* Calendar Grid */}
@@ -181,7 +181,7 @@ export const SpendingCalendar = ({ filteredData }: SpendingCalendarProps) => {
                   {data.transactions.length > 0 && (
                     <div className="border-t border-gray-700 pt-2">
                       <p className="text-gray-400 text-xs mb-1">
-                        {data.transactions.length} transaction(s)
+                        {data.transactions.length} lançamento(s)
                       </p>
                       <div className="max-h-24 overflow-y-auto space-y-1">
                         {data.transactions.slice(0, 3).map((t) => (
@@ -195,7 +195,7 @@ export const SpendingCalendar = ({ filteredData }: SpendingCalendarProps) => {
                         ))}
                         {data.transactions.length > 3 && (
                           <p className="text-gray-500 text-xs">
-                            +{data.transactions.length - 3} more
+                            +{data.transactions.length - 3} mais
                           </p>
                         )}
                       </div>
@@ -210,7 +210,7 @@ export const SpendingCalendar = ({ filteredData }: SpendingCalendarProps) => {
 
       {/* Weekly Summary */}
       <div className="mt-6 grid grid-cols-7 gap-2">
-        {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => {
+        {["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"].map((day) => {
           const daySpending = dates
             .filter((dateStr) => getDayName(dateStr) === day)
             .reduce((sum, dateStr) => sum + (dailySpending[dateStr]?.total || 0), 0);

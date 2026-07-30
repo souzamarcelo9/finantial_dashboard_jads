@@ -14,6 +14,23 @@ interface ChartComponentProps {
 
 export const commonChartOptions = getCommonChartOptions();
 
+/**
+ * Traduz o rótulo exibido nos botões de alternância de período
+ * (mês/ano/todo o período), aceitando tanto "month"/"year" quanto
+ * "monthly"/"yearly" como valor interno do modo.
+ */
+const VIEW_MODE_LABELS: Record<string, string> = {
+  month: "Mensal",
+  monthly: "Mensal",
+  year: "Anual",
+  yearly: "Anual",
+  "all-time": "Todo o Período",
+};
+
+export const translateViewModeLabel = (mode: string): string =>
+  VIEW_MODE_LABELS[mode] ?? mode.charAt(0).toUpperCase() + mode.slice(1);
+
+
 export const doughnutOptions = {
   ...commonChartOptions,
   scales: {},
@@ -219,13 +236,13 @@ export const EnhancedSpendingByAccountChart = ({ filteredData, chartRef }: Chart
           },
           callbacks: {
             title: (tooltipItems) => {
-              return `Account: ${tooltipItems[0].label}`;
+              return `Conta: ${tooltipItems[0].label}`;
             },
             label: (context) => {
               const value = context.parsed;
               const total = context.dataset.data.reduce((sum, val) => sum + val, 0);
               const percentage = ((value / total) * 100).toFixed(1);
-              return [`Amount: ${formatCurrency(value)}`, `Percentage: ${percentage}%`];
+              return [`Montante: ${formatCurrency(value)}`, `Percentual: ${percentage}%`];
             },
           },
         },
@@ -247,7 +264,7 @@ export const EnhancedSpendingByAccountChart = ({ filteredData, chartRef }: Chart
       "Fevereiro",
       "Março",
       "Abril",
-      "Maio",
+      "Mai",
       "Junho",
       "Julho",
       "Agosto",
@@ -261,11 +278,11 @@ export const EnhancedSpendingByAccountChart = ({ filteredData, chartRef }: Chart
 
   const getDisplayTitle = () => {
     if (viewMode === "all-time") {
-      return "Spending by Account (All Time)";
+      return "Gastos por conta (todos os tempos)";
     } else if (viewMode === "year") {
-      return `Spending by Account (${currentYear})`;
+      return `Gastos por conta (${currentYear})`;
     } else if (viewMode === "month") {
-      return `Spending by Account (${formatMonthLabel(currentMonth)} ${currentYear})`;
+      return `Gastos por conta (${formatMonthLabel(currentMonth)} ${currentYear})`;
     }
     return "Gastos por Conta";
   };
@@ -332,7 +349,7 @@ export const EnhancedSpendingByAccountChart = ({ filteredData, chartRef }: Chart
                 : "bg-gradient-to-r from-gray-700 to-gray-800 text-gray-300 hover:from-gray-600 hover:to-gray-700 border border-gray-600"
             }`}
           >
-            {mode === "all-time" ? "Todo o Período" : mode.charAt(0).toUpperCase() + mode.slice(1)}
+            {translateViewModeLabel(mode)}
           </button>
         ))}
       </div>
@@ -382,7 +399,7 @@ export const EnhancedSpendingByAccountChart = ({ filteredData, chartRef }: Chart
       {/* Total Spending Display */}
       <div className="relative z-10 text-center mb-4 p-4 bg-gradient-to-r from-gray-800/50 to-gray-900/50 rounded-xl border border-gray-700/50">
         <div className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
-          Total Spending
+          Total de gastos
         </div>
         <div className="text-2xl font-bold text-white group-hover:text-gray-100 transition-colors duration-300">
           {formatCurrency(totalSpending)}
@@ -396,9 +413,9 @@ export const EnhancedSpendingByAccountChart = ({ filteredData, chartRef }: Chart
         ) : (
           <div className="flex items-center justify-center h-full text-gray-400">
             <div className="text-center">
-              <div className="text-4xl mb-2">ðŸ“Š</div>
-              <div>No spending data available</div>
-              <div className="text-sm">for the selected period</div>
+              <div className="text-4xl mb-2">📊</div>
+              <div>Sem dados de gasto disponíveis</div>
+              <div className="text-sm">para o período selecionado</div>
             </div>
           </div>
         )}
@@ -437,7 +454,7 @@ export const EnhancedSubcategoryBreakdownChart = ({
       "Fevereiro",
       "Março",
       "Abril",
-      "Maio",
+      "Mai",
       "Junho",
       "Julho",
       "Agosto",
@@ -450,7 +467,7 @@ export const EnhancedSubcategoryBreakdownChart = ({
   );
 
   const shortMonthNames = React.useMemo(
-    () => ["Jan", "Feb", "Mar", "Apr", "Maio", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    () => ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
     []
   );
 
@@ -710,7 +727,7 @@ export const EnhancedSubcategoryBreakdownChart = ({
   return (
     <div className="bg-gray-800 p-6 rounded-2xl shadow-lg h-[450px] flex flex-col">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-xl font-semibold text-white">Enhanced Subcategory Analysis</h3>
+        <h3 className="text-xl font-semibold text-white">Análise de subcategorias aprimorada</h3>
         <div className="flex items-center gap-3">
           <select
             value={selectedCategory}
@@ -765,9 +782,9 @@ export const EnhancedSubcategoryBreakdownChart = ({
             onChange={(e) => setViewMode(e.target.value)}
             className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm transition-colors border-none focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="month">Monthly View</option>
-            <option value="year">Yearly View</option>
-            <option value="decade">Decade View</option>
+            <option value="month">Visão Mensal</option>
+            <option value="year">Visão Anual</option>
+            <option value="decade">Visão na década</option>
           </select>
           <select
             value={dataMode}
@@ -775,7 +792,7 @@ export const EnhancedSubcategoryBreakdownChart = ({
             className="bg-gray-600 hover:bg-gray-700 text-white px-3 py-1 rounded text-sm transition-colors border-none focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="regular">Regular</option>
-            <option value="cumulative">Cumulative</option>
+            <option value="cumulative">Cumulativa</option>
           </select>
         </div>
 
@@ -832,7 +849,7 @@ export const EnhancedSubcategoryBreakdownChart = ({
             timeFilteredData.filter((i) => i.type === "Expense" && i.category === selectedCategory)
               .length
           }{" "}
-          transactions
+          transações
         </div>
       </div>
 
@@ -860,7 +877,7 @@ export const MultiCategoryTimeAnalysisChart = ({
       "Fevereiro",
       "Março",
       "Abril",
-      "Maio",
+      "Mai",
       "Junho",
       "Julho",
       "Agosto",
@@ -873,7 +890,7 @@ export const MultiCategoryTimeAnalysisChart = ({
   );
 
   const shortMonthNames = React.useMemo(
-    () => ["Jan", "Feb", "Mar", "Apr", "Maio", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    () => ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
     []
   );
 
@@ -1097,7 +1114,7 @@ export const MultiCategoryTimeAnalysisChart = ({
   return (
     <div className="bg-gray-800 p-6 rounded-2xl shadow-lg h-[450px] flex flex-col">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-xl font-semibold text-white">Multi-Category Time Analysis</h3>
+        <h3 className="text-xl font-semibold text-white">Multi Categorias - Análise Temporal</h3>
         <button
           onClick={() => {
             if (chartRef?.current) {
@@ -1139,9 +1156,9 @@ export const MultiCategoryTimeAnalysisChart = ({
             onChange={(e) => setViewMode(e.target.value)}
             className="bg-purple-600 hover:bg-purple-700 text-white px-3 py-1 rounded text-sm transition-colors border-none focus:outline-none focus:ring-2 focus:ring-purple-500"
           >
-            <option value="month">Monthly View</option>
-            <option value="year">Yearly View</option>
-            <option value="decade">Decade View</option>
+            <option value="month">Visualização Mensal</option>
+            <option value="year">Visualização Anual</option>
+            <option value="decade">Visualização na década</option>
           </select>
           <select
             value={dataMode}
@@ -1149,7 +1166,7 @@ export const MultiCategoryTimeAnalysisChart = ({
             className="bg-gray-600 hover:bg-gray-700 text-white px-3 py-1 rounded text-sm transition-colors border-none focus:outline-none focus:ring-2 focus:ring-purple-500"
           >
             <option value="regular">Regular</option>
-            <option value="cumulative">Cumulative</option>
+            <option value="cumulative">Cumulativo</option>
           </select>
         </div>
 
@@ -1177,7 +1194,7 @@ export const MultiCategoryTimeAnalysisChart = ({
                 return `${Math.floor(currentYear / 10) * 10}s`;
               }
               if (viewMode === "year") {
-                return `Year ${currentYear}`;
+                return `Ano ${currentYear}`;
               }
               return `${monthNames[currentMonth - 1]} ${currentYear}`;
             })()}
@@ -1202,7 +1219,7 @@ export const MultiCategoryTimeAnalysisChart = ({
         </div>
 
         <div className="text-sm text-gray-400">
-          {timeFilteredData.filter((i) => i.type === "Expense").length} expense transactions
+          {timeFilteredData.filter((i) => i.type === "Expense").length} transações com gastos
         </div>
       </div>
 
@@ -1291,17 +1308,17 @@ export const NetWorthTrendChart = ({ filteredData, chartRef }) => {
       } else if (viewMode === "year") {
         const monthNames = [
           "Jan",
-          "Feb",
+          "Fev",
           "Mar",
-          "Apr",
-          "Maio",
+          "Abr",
+          "Mai",
           "Jun",
           "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
+          "Ago",
+          "Set",
+          "Out",
           "Nov",
-          "Dec",
+          "Dez",
         ];
         return monthNames[date.getMonth()];
       }
@@ -1310,17 +1327,17 @@ export const NetWorthTrendChart = ({ filteredData, chartRef }) => {
       }
       const monthNames = [
         "Jan",
-        "Feb",
+        "Fev",
         "Mar",
-        "Apr",
-        "Maio",
+        "Abr",
+        "Mai",
         "Jun",
         "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
+        "Ago",
+        "Set",
+        "Out",
         "Nov",
-        "Dec",
+        "Dez",
       ];
       return `${monthNames[date.getMonth()]} ${date.getFullYear()}`;
     };
@@ -1395,13 +1412,13 @@ export const NetWorthTrendChart = ({ filteredData, chartRef }) => {
               const index = tooltipItems[0].dataIndex;
               const dataPoint = timeFilteredData[index];
               if (dataPoint) {
-                return `Date: ${dataPoint.date.toLocaleDateString("pt-BR")}`;
+                return `Data: ${dataPoint.date.toLocaleDateString("pt-BR")}`;
               }
               return tooltipItems[0].label;
             },
             label: (context) => {
               const value = context.parsed.y;
-              return `Net Worth: ${formatCurrency(value)}`;
+              return `Patrimônio líquido: ${formatCurrency(value)}`;
             },
           },
         },
@@ -1436,11 +1453,11 @@ export const NetWorthTrendChart = ({ filteredData, chartRef }) => {
             callback: (value) => {
               const formatCurrency = (val) => {
                 if (Math.abs(val) >= 1000000) {
-                  return `â‚¹${(val / 1000000).toFixed(1)}M`;
+                  return `R$${(val / 1000000).toFixed(1)}M`;
                 } else if (Math.abs(val) >= 1000) {
-                  return `â‚¹${(val / 1000).toFixed(0)}K`;
+                  return `R$${(val / 1000).toFixed(0)}K`;
                 }
-                return `â‚¹${val.toFixed(0)}`;
+                return `R$${val.toFixed(0)}`;
               };
               return formatCurrency(value);
             },
@@ -1461,7 +1478,7 @@ export const NetWorthTrendChart = ({ filteredData, chartRef }) => {
       "Fevereiro",
       "Março",
       "Abril",
-      "Maio",
+      "Mai",
       "Junho",
       "Julho",
       "Agosto",
@@ -1525,11 +1542,11 @@ export const NetWorthTrendChart = ({ filteredData, chartRef }) => {
 
   const getDisplayTitle = () => {
     if (viewMode === "all-time") {
-      return "Net Worth Progression (All Time)";
+      return "Progressão do patrimônio líquido (Todo o período)";
     } else if (viewMode === "year") {
-      return `Net Worth Progression (${currentYear})`;
+      return `Progressão do patrimônio líquido (${currentYear})`;
     } else if (viewMode === "month") {
-      return `Net Worth Progression (${monthNames[currentMonth - 1]} ${currentYear})`;
+      return `Progressão do patrimônio líquido (${monthNames[currentMonth - 1]} ${currentYear})`;
     }
     return "Evolução do Patrimônio Líquido";
   };
@@ -1598,7 +1615,7 @@ export const NetWorthTrendChart = ({ filteredData, chartRef }) => {
                 : "bg-gray-700 text-gray-300 hover:bg-gray-600"
             }`}
           >
-            {mode === "all-time" ? "Todo o Período" : mode.charAt(0).toUpperCase() + mode.slice(1)}
+            {translateViewModeLabel(mode)}
           </button>
         ))}
       </div>
@@ -1648,7 +1665,7 @@ export const NetWorthTrendChart = ({ filteredData, chartRef }) => {
       {/* Key Metrics */}
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div className="bg-gray-700/50 p-3 rounded-lg">
-          <div className="text-sm text-gray-400">Current Net Worth</div>
+          <div className="text-sm text-gray-400">Patrimônio líquido atual</div>
           <div
             className={`text-lg font-bold ${
               currentNetWorth >= 0 ? "text-emerald-400" : "text-red-400"
@@ -1705,9 +1722,9 @@ export const NetWorthTrendChart = ({ filteredData, chartRef }) => {
         ) : (
           <div className="flex items-center justify-center h-full text-gray-400">
             <div className="text-center">
-              <div className="text-4xl mb-2">ðŸ“ˆ</div>
-              <div>No financial data available</div>
-              <div className="text-sm">for the selected period</div>
+              <div className="text-4xl mb-2">📈</div>
+              <div>Sem dados financeiros</div>
+              <div className="text-sm">para o periodo selecionado</div>
             </div>
           </div>
         )}
@@ -1829,17 +1846,17 @@ export const CumulativeCategoryTrendChart = ({ filteredData, chartRef }) => {
       } else if (viewMode === "yearly") {
         const monthNames = [
           "Jan",
-          "Feb",
+          "Fev",
           "Mar",
-          "Apr",
-          "Maio",
+          "Abr",
+          "Mai",
           "Jun",
           "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
+          "Ago",
+          "Set",
+          "Out",
           "Nov",
-          "Dec",
+          "Dez",
         ];
         return monthNames[date.getMonth()];
       }
@@ -1848,17 +1865,17 @@ export const CumulativeCategoryTrendChart = ({ filteredData, chartRef }) => {
       }
       const monthNames = [
         "Jan",
-        "Feb",
+        "Fev",
         "Mar",
-        "Apr",
-        "Maio",
+        "Abr",
+        "Mai",
         "Jun",
         "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
+        "Ago",
+        "Set",
+        "Out",
         "Nov",
-        "Dec",
+        "Dez",
       ];
       return `${monthNames[date.getMonth()]} ${date.getFullYear()}`;
     };
@@ -2011,7 +2028,7 @@ export const CumulativeCategoryTrendChart = ({ filteredData, chartRef }) => {
       "Fevereiro",
       "Março",
       "Abril",
-      "Maio",
+      "Mai",
       "Junho",
       "Julho",
       "Agosto",
@@ -2075,11 +2092,11 @@ export const CumulativeCategoryTrendChart = ({ filteredData, chartRef }) => {
 
   const getDisplayTitle = () => {
     if (viewMode === "all-time") {
-      return "Cumulative Category Spending Trends (All Time)";
+      return "Tendências cumulativas de gastos por categoria( todos )";
     } else if (viewMode === "yearly") {
-      return `Cumulative Category Spending Trends (${currentYear})`;
+      return `Tendências cumulativas de gastos por categoria (${currentYear})`;
     } else if (viewMode === "monthly") {
-      return `Cumulative Category Spending Trends (${monthNames[currentMonth - 1]} ${currentYear})`;
+      return `Tendências cumulativas de gastos por categoria (${monthNames[currentMonth - 1]} ${currentYear})`;
     }
     return "Tendência Acumulada de Gastos por Categoria";
   };
@@ -2143,7 +2160,7 @@ export const CumulativeCategoryTrendChart = ({ filteredData, chartRef }) => {
                 : "bg-gray-700 text-gray-300 hover:bg-gray-600"
             }`}
           >
-            {mode === "all-time" ? "Todo o Período" : mode.charAt(0).toUpperCase() + mode.slice(1)}
+            {translateViewModeLabel(mode)}
           </button>
         ))}
       </div>
@@ -2192,7 +2209,7 @@ export const CumulativeCategoryTrendChart = ({ filteredData, chartRef }) => {
 
       {/* Category Selection */}
       <div className="mb-4">
-        <div className="text-sm text-gray-400 mb-2">Select Categories to Display:</div>
+        <div className="text-sm text-gray-400 mb-2">Selecione as categorias para exibir:</div>
         <div className="flex flex-wrap gap-2 max-h-20 overflow-y-auto">
           {availableCategories.map((category) => (
             <button
@@ -2217,7 +2234,7 @@ export const CumulativeCategoryTrendChart = ({ filteredData, chartRef }) => {
         ) : (
           <div className="flex items-center justify-center h-full text-gray-400">
             <div className="text-center">
-              <div className="text-4xl mb-2">ðŸ“Š</div>
+              <div className="text-4xl mb-2">📊</div>
               <div>
                 {selectedCategories.size === 0
                   ? "Selecione as categorias para exibir"
@@ -2226,7 +2243,7 @@ export const CumulativeCategoryTrendChart = ({ filteredData, chartRef }) => {
               <div className="text-sm">
                 {selectedCategories.size === 0
                   ? "Escolha entre as categorias acima"
-                  : "for the selected period"}
+                  : "para o período selecionado"}
               </div>
             </div>
           </div>
@@ -2305,17 +2322,17 @@ export const SeasonalSpendingHeatmap = ({ filteredData, chartRef }) => {
       heatmapData: {
         labels: [
           "Jan",
-          "Feb",
+          "Fev",
           "Mar",
-          "Apr",
-          "Maio",
+          "Abr",
+          "Mai",
           "Jun",
           "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
+          "Ago",
+          "Set",
+          "Out",
           "Nov",
-          "Dec",
+          "Dez",
         ],
         datasets,
       },
@@ -2331,17 +2348,17 @@ export const SeasonalSpendingHeatmap = ({ filteredData, chartRef }) => {
 
     const monthNames = [
       "Jan",
-      "Feb",
+      "Fev",
       "Mar",
-      "Apr",
-      "Maio",
+      "Abr",
+      "Mai",
       "Jun",
       "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
+      "Ago",
+      "Set",
+      "Out",
       "Nov",
-      "Dec",
+      "Dez",
     ];
 
     const entries = Object.entries(seasonalAnalysis.indices || {});
@@ -2368,12 +2385,12 @@ export const SeasonalSpendingHeatmap = ({ filteredData, chartRef }) => {
     <div className="bg-gray-800 p-6 rounded-2xl shadow-lg h-[450px] flex flex-col">
       <div className="flex justify-between items-center mb-2">
         <div>
-          <h3 className="text-xl font-semibold text-white">Seasonal Spending Heatmap</h3>
+          <h3 className="text-xl font-semibold text-white">Mapa de Calor - Gastos Sazonais</h3>
           {seasonalInfo && (
             <div className="text-xs text-gray-400 mt-1">
-              Peak: {seasonalInfo.peak?.month} ({((seasonalInfo.peak?.index - 1) * 100).toFixed(0)}%
-              above avg) | Low: {seasonalInfo.low?.month} (
-              {((1 - seasonalInfo.low?.index) * 100).toFixed(0)}% below avg) | Seasonality:{" "}
+              Pico: {seasonalInfo.peak?.month} ({((seasonalInfo.peak?.index - 1) * 100).toFixed(0)}%
+              acima média) | Abaixo: {seasonalInfo.low?.month} (
+              {((1 - seasonalInfo.low?.index) * 100).toFixed(0)}% abaixo média) | Sasonalidade:{" "}
               {seasonalAnalysis.hasSeasonality ? "Forte" : "Fraco"}
             </div>
           )}
@@ -2386,7 +2403,7 @@ export const SeasonalSpendingHeatmap = ({ filteredData, chartRef }) => {
           >
             {availableCategories.map((category) => (
               <option key={category} value={category}>
-                {category}
+                {category === "All" ? "Todas" : category}
               </option>
             ))}
           </select>
@@ -2522,7 +2539,7 @@ export const YearOverYearComparisonChart = ({ filteredData, chartRef }) => {
 
     const labels =
       comparisonType === "monthly"
-        ? ["Jan", "Feb", "Mar", "Apr", "Maio", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        ? ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
         : ["Q1", "Q2", "Q3", "Q4"];
 
     const colors = ["#3b82f6", "#8b5cf6", "#ec4899", "#f97316", "#eab308", "#10b981"];
@@ -2561,15 +2578,15 @@ export const YearOverYearComparisonChart = ({ filteredData, chartRef }) => {
   return (
     <div className="bg-gray-800 p-6 rounded-2xl shadow-lg h-[450px] flex flex-col lg:col-span-2">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-xl font-semibold text-white">Year-over-Year Comparison</h3>
+        <h3 className="text-xl font-semibold text-white">Comparação Ano a Ano</h3>
         <div className="flex items-center space-x-4">
           <select
             value={comparisonType}
             onChange={(e) => setComparisonType(e.target.value)}
             className="bg-gray-700 text-white px-3 py-1 rounded-lg text-sm"
           >
-            <option value="monthly">Monthly</option>
-            <option value="quarterly">Quarterly</option>
+            <option value="monthly">Mensalmente</option>
+            <option value="quarterly">Trimestral</option>
           </select>
           <button
             onClick={() => {
@@ -2602,7 +2619,7 @@ export const YearOverYearComparisonChart = ({ filteredData, chartRef }) => {
 
       {/* Year Selection */}
       <div className="mb-4">
-        <div className="text-sm text-gray-400 mb-2">Select Years to Compare:</div>
+        <div className="text-sm text-gray-400 mb-2">Selecione os anos para comparar:</div>
         <div className="flex flex-wrap gap-2">
           {availableYears.map((year) => (
             <button
@@ -2736,17 +2753,17 @@ export const SpendingForecastChart = ({ filteredData, chartRef }) => {
       const [year, monthNum] = month.split("-");
       const monthNames = [
         "Jan",
-        "Feb",
+        "Fev",
         "Mar",
-        "Apr",
-        "Maio",
+        "Abr",
+        "Mai",
         "Jun",
         "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
+        "Ago",
+        "Set",
+        "Out",
         "Nov",
-        "Dec",
+        "Dez",
       ];
       return `${monthNames[Number.parseInt(monthNum, 10) - 1]} ${year}`;
     });
@@ -2826,10 +2843,10 @@ export const SpendingForecastChart = ({ filteredData, chartRef }) => {
     <div className="bg-gray-800 p-6 rounded-2xl shadow-lg h-[500px] flex flex-col lg:col-span-2">
       <div className="flex justify-between items-center mb-2">
         <div>
-          <h3 className="text-xl font-semibold text-white">Advanced Spending Forecast</h3>
+          <h3 className="text-xl font-semibold text-white">Previsão Avançada de Gastos</h3>
           {forecastInfo && (
             <div className="text-xs text-gray-400 mt-1">
-              Method: {forecastInfo.method} | Volatility: {forecastInfo.volatility?.level || "N/A"}{" "}
+              Método: {forecastInfo.method} | Volatilidade: {forecastInfo.volatility?.level || "N/A"}{" "}
               | R²: {(forecastInfo.dataQuality?.r2 || 0).toFixed(2)} | Outliers:{" "}
               {forecastInfo.outliers}
             </div>
@@ -2841,19 +2858,19 @@ export const SpendingForecastChart = ({ filteredData, chartRef }) => {
             onChange={(e) => setForecastMonths(Number.parseInt(e.target.value, 10))}
             className="bg-gray-700 text-white px-2 py-1 rounded-lg text-xs"
           >
-            <option value={3}>3 Months</option>
-            <option value={6}>6 Months</option>
-            <option value={12}>12 Months</option>
+            <option value={3}>3 Meses</option>
+            <option value={6}>6 Meses</option>
+            <option value={12}>12 Meses</option>
           </select>
           <select
             value={forecastType}
             onChange={(e) => setForecastType(e.target.value)}
             className="bg-gray-700 text-white px-2 py-1 rounded-lg text-xs"
           >
-            <option value="best">Best Fit</option>
-            <option value="simple">Simple Avg</option>
-            <option value="exponential">Exponential</option>
-            <option value="regression">Regression</option>
+            <option value="best">Melhor Ajuste</option>
+            <option value="simple">Média</option>
+            <option value="exponential">Exponencial</option>
+            <option value="regression">Regressão</option>
           </select>
           <label className="flex items-center text-xs text-gray-300">
             <input
@@ -3005,17 +3022,17 @@ export const AccountBalanceProgressionChart = ({ filteredData, chartRef }) => {
       const [year, monthNum] = month.split("-");
       const monthNames = [
         "Jan",
-        "Feb",
+        "Fev",
         "Mar",
-        "Apr",
-        "Maio",
+        "Abr",
+        "Mai",
         "Jun",
         "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
+        "Ago",
+        "Set",
+        "Out",
         "Nov",
-        "Dec",
+        "Dez",
       ];
       return `${monthNames[Number.parseInt(monthNum, 10) - 1]} ${year}`;
     });
@@ -3127,7 +3144,7 @@ export const AccountBalanceProgressionChart = ({ filteredData, chartRef }) => {
           ...(viewMode === "monthly"
             ? [
                 {
-                  label: "Income",
+                  label: "Receita",
                   data: allMonths.map((month) => accountData[account][month].income),
                   borderColor: "#3b82f6",
                   backgroundColor: "rgba(59, 130, 246, 0.1)",
@@ -3136,7 +3153,7 @@ export const AccountBalanceProgressionChart = ({ filteredData, chartRef }) => {
                   tension: 0.3,
                 },
                 {
-                  label: "Expense",
+                  label: "Despesa",
                   data: allMonths.map((month) => -accountData[account][month].expense),
                   borderColor: "#ef4444",
                   backgroundColor: "rgba(239, 68, 68, 0.1)",
@@ -3158,14 +3175,14 @@ export const AccountBalanceProgressionChart = ({ filteredData, chartRef }) => {
   return (
     <div className="bg-gray-800 p-6 rounded-2xl shadow-lg h-[500px] flex flex-col lg:col-span-2">
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-xl font-semibold text-white">Account Balance Progression</h3>
+        <h3 className="text-xl font-semibold text-white">Progressão do saldo da conta</h3>
         <div className="flex items-center space-x-3">
           <select
             value={selectedAccount}
             onChange={(e) => setSelectedAccount(e.target.value)}
             className="bg-gray-700 border border-gray-600 text-white px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="all">All Accounts</option>
+            <option value="all">Todas as contas</option>
             {accounts.map((account) => (
               <option key={account} value={account}>
                 {account}
@@ -3177,8 +3194,8 @@ export const AccountBalanceProgressionChart = ({ filteredData, chartRef }) => {
             onChange={(e) => setViewMode(e.target.value)}
             className="bg-gray-700 border border-gray-600 text-white px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="cumulative">Cumulative</option>
-            <option value="monthly">Monthly</option>
+            <option value="cumulative">Cumulativo</option>
+            <option value="monthly">Mensal</option>
           </select>
           {selectedAccount === "all" && (
             <label className="flex items-center space-x-2 text-sm text-gray-300 cursor-pointer">
@@ -3188,7 +3205,7 @@ export const AccountBalanceProgressionChart = ({ filteredData, chartRef }) => {
                 onChange={(e) => setShowAverage(e.target.checked)}
                 className="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2"
               />
-              <span>Show Average</span>
+              <span>Mostrar Média</span>
             </label>
           )}
           <button
@@ -3430,24 +3447,24 @@ export const DayWeekSpendingPatternsChart = ({ filteredData, chartRef }) => {
   return (
     <div className="bg-gray-800 p-6 rounded-2xl shadow-lg h-[450px] flex flex-col lg:col-span-2">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-xl font-semibold text-white">Spending Patterns</h3>
+        <h3 className="text-xl font-semibold text-white">Padrão de Gastos</h3>
         <div className="flex items-center space-x-4">
           <select
             value={patternType}
             onChange={(e) => setPatternType(e.target.value)}
             className="bg-gray-700 text-white px-3 py-1 rounded-lg text-sm"
           >
-            <option value="dayOfWeek">Day of Week</option>
-            <option value="dayOfMonth">Day of Month</option>
+            <option value="dayOfWeek">Dia da Semana</option>
+            <option value="dayOfMonth">Dia do Mês</option>
           </select>
           <select
             value={metricType}
             onChange={(e) => setMetricType(e.target.value)}
             className="bg-gray-700 text-white px-3 py-1 rounded-lg text-sm"
           >
-            <option value="expense">Expenses</option>
-            <option value="income">Income</option>
-            <option value="count">Transaction Count</option>
+            <option value="expense">Gastos</option>
+            <option value="income">Ganhos</option>
+            <option value="count">Contagem transacional</option>
           </select>
           <button
             onClick={() => {
@@ -3727,9 +3744,9 @@ export const SankeyFlowChart = ({ filteredData, chartRef }) => {
     <div className="lg:col-span-2 bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700 h-[600px] flex flex-col">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
         <div>
-          <h3 className="text-xl font-bold text-white mb-2">â‚¹ Money Flow Analysis</h3>
+          <h3 className="text-xl font-bold text-white mb-2">R$ Análise do Fluxo Monetário</h3>
           <p className="text-gray-400 text-sm">
-            Visualize how money flows from income sources to expense categories
+            Visualize como o dinheiro flui das fontes de renda para as categorias de despesas.
           </p>
         </div>
 
@@ -3739,11 +3756,11 @@ export const SankeyFlowChart = ({ filteredData, chartRef }) => {
             onChange={(e) => setTimeRange(e.target.value)}
             className="bg-gray-700 text-white border border-gray-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
-            <option value="all">All Time</option>
-            <option value="1month">Last Month</option>
-            <option value="3months">Last 3 Months</option>
-            <option value="6months">Last 6 Months</option>
-            <option value="1year">Last Year</option>
+            <option value="all">Todo o período</option>
+            <option value="1month">Último Mês</option>
+            <option value="3months">Últimos 3 Meses</option>
+            <option value="6months">Últimos 6 Meses</option>
+            <option value="1year">Último ano</option>
           </select>
 
           <select
@@ -3751,17 +3768,17 @@ export const SankeyFlowChart = ({ filteredData, chartRef }) => {
             onChange={(e) => setMinFlowAmount(Number(e.target.value))}
             className="bg-gray-700 text-white border border-gray-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
-            <option value={50}>Min: â‚¹50</option>
-            <option value={100}>Min: â‚¹100</option>
-            <option value={500}>Min: â‚¹500</option>
-            <option value={1000}>Min: â‚¹1000</option>
+            <option value={50}>Mín: R$50</option>
+            <option value={100}>Mín: R$100</option>
+            <option value={500}>Mín: R$500</option>
+            <option value={1000}>Mín: R$1000</option>
           </select>
 
           <button
             onClick={() => exportToCSV(filteredData, "money_flow_analysis.csv")}
             className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 flex items-center gap-2 text-sm"
           >
-            ðŸ“Š Export
+            📊 Exportar
           </button>
         </div>
       </div>
@@ -3787,7 +3804,7 @@ export const SankeyFlowChart = ({ filteredData, chartRef }) => {
                 fontWeight="bold"
                 textAnchor="middle"
               >
-                â‚¹ Income Sources
+                R$ Fontes de Renda
               </text>
               <text
                 x={width - 120}
@@ -3797,7 +3814,7 @@ export const SankeyFlowChart = ({ filteredData, chartRef }) => {
                 fontWeight="bold"
                 textAnchor="middle"
               >
-                â‚¹ Expense Categories
+                R$ Categorias de Custo
               </text>
 
               {/* Links (flows) */}
@@ -3858,17 +3875,17 @@ export const SankeyFlowChart = ({ filteredData, chartRef }) => {
               <g transform={`translate(20, ${height - 60})`}>
                 <rect x={0} y={0} width={15} height={15} fill="#10b981" rx={3} />
                 <text x={20} y={12} fill="#9ca3af" fontSize="12">
-                  Income Sources
+                  Fontes de Renda
                 </text>
 
                 <rect x={130} y={0} width={15} height={15} fill="#ef4444" rx={3} />
                 <text x={150} y={12} fill="#9ca3af" fontSize="12">
-                  Expense Categories
+                  Categorias de Custo
                 </text>
 
                 <rect x={280} y={0} width={15} height={3} fill="#60a5fa" rx={1} />
                 <text x={300} y={12} fill="#9ca3af" fontSize="12">
-                  Money Flow
+                  Fluxo do Dinheiro
                 </text>
               </g>
             </svg>
@@ -3876,16 +3893,16 @@ export const SankeyFlowChart = ({ filteredData, chartRef }) => {
         ) : (
           <div className="flex items-center justify-center h-full text-gray-400">
             <div className="text-center">
-              <div className="text-4xl mb-3">ðŸ”„</div>
-              <div className="text-lg mb-2">No flow data available</div>
+              <div className="text-4xl mb-3">🔄</div>
+              <div className="text-lg mb-2">Sem dados disponíveis</div>
               <div className="text-sm">
                 {filteredData.length === 0
                   ? "Envie os dados de lançamentos para ver a análise de fluxo financeiro"
-                  : `Found ${filteredData.length} transactions, but no qualifying flows with current filters`}
+                  : `Encontrou ${filteredData.length} transações,porém nenhum fluxo de categoria adequado `}
               </div>
               {filteredData.length > 0 && (
                 <div className="text-xs text-gray-500 mt-2">
-                  Try reducing the minimum amount filter or changing the time range
+                   Tente filtrar por um período maior
                 </div>
               )}
             </div>
@@ -3897,19 +3914,19 @@ export const SankeyFlowChart = ({ filteredData, chartRef }) => {
       {sankeyData.nodes.length > 0 && (
         <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
           <div className="bg-gray-700 rounded-lg p-3">
-            <div className="text-gray-400">Income Sources</div>
+            <div className="text-gray-400">Fontes de Renda</div>
             <div className="text-green-400 font-bold">
               {sankeyData.nodes.filter((n) => n.type === "income").length}
             </div>
           </div>
           <div className="bg-gray-700 rounded-lg p-3">
-            <div className="text-gray-400">Expense Categories</div>
+            <div className="text-gray-400">Categorias de custo</div>
             <div className="text-red-400 font-bold">
               {sankeyData.nodes.filter((n) => n.type === "expense").length}
             </div>
           </div>
           <div className="bg-gray-700 rounded-lg p-3">
-            <div className="text-gray-400">Total Income</div>
+            <div className="text-gray-400">Total de Ganhos</div>
             <div className="text-green-400 font-bold">
               {formatCurrency(
                 sankeyData.nodes
@@ -3919,7 +3936,7 @@ export const SankeyFlowChart = ({ filteredData, chartRef }) => {
             </div>
           </div>
           <div className="bg-gray-700 rounded-lg p-3">
-            <div className="text-gray-400">Total Expenses</div>
+            <div className="text-gray-400">Total de gastos</div>
             <div className="text-red-400 font-bold">
               {formatCurrency(
                 sankeyData.nodes

@@ -29,7 +29,7 @@ export const AdvancedAnalyticsDashboard = ({ filteredData }) => {
   if (!analytics || !filteredData || filteredData.length === 0) {
     return (
       <div className="text-center py-12 text-gray-400">
-        <p>Upload transaction data to see advanced analytics</p>
+        <p>Envie os dados de lançamentos para ver as análises avançadas</p>
       </div>
     );
   }
@@ -38,8 +38,8 @@ export const AdvancedAnalyticsDashboard = ({ filteredData }) => {
     <div className="space-y-6">
       {/* Section Header */}
       <div className="text-center">
-        <h2 className="text-3xl font-bold text-white mb-2">🚀 Advanced Analytics</h2>
-        <p className="text-gray-400">Powered by your new calculation engine</p>
+        <h2 className="text-3xl font-bold text-white mb-2">🚀 Análises Avançadas</h2>
+        <p className="text-gray-400">Baseado no seu novo motor de cálculo</p>
       </div>
 
       {/* Summary Cards Row */}
@@ -47,7 +47,7 @@ export const AdvancedAnalyticsDashboard = ({ filteredData }) => {
         {/* Monthly Trend */}
         <div className="bg-gradient-to-br from-blue-900/30 to-blue-800/20 border border-blue-500/30 rounded-xl p-4">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-gray-400 text-sm">Monthly Trend</span>
+            <span className="text-gray-400 text-sm">Tendência Mensal</span>
             {analytics.monthlyComparison?.avgGrowth > 0 ? (
               <TrendingUp className="text-red-400" size={20} />
             ) : (
@@ -59,14 +59,14 @@ export const AdvancedAnalyticsDashboard = ({ filteredData }) => {
           </div>
           <div className="text-sm text-gray-400">
             {analytics.monthlyComparison?.avgGrowth > 0 ? "+" : ""}
-            {analytics.monthlyComparison?.avgGrowth?.toFixed(1)}% avg growth
+            {analytics.monthlyComparison?.avgGrowth?.toFixed(1)}% média de crescimento
           </div>
         </div>
 
         {/* Subscriptions */}
         <div className="bg-gradient-to-br from-purple-900/30 to-purple-800/20 border border-purple-500/30 rounded-xl p-4">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-gray-400 text-sm">Subscriptions</span>
+            <span className="text-gray-400 text-sm">Assinaturas</span>
             <Calendar className="text-purple-400" size={20} />
           </div>
           <div className="text-2xl font-bold text-white">
@@ -78,7 +78,7 @@ export const AdvancedAnalyticsDashboard = ({ filteredData }) => {
               ?.filter((r) => r.isMonthly)
               .reduce((sum, s) => sum + s.amount, 0)
               .toFixed(0) || 0}
-            /month
+            /mês
           </div>
         </div>
 
@@ -91,7 +91,7 @@ export const AdvancedAnalyticsDashboard = ({ filteredData }) => {
           }`}
         >
           <div className="flex items-center justify-between mb-2">
-            <span className="text-gray-400 text-sm">Unusual Transactions</span>
+            <span className="text-gray-400 text-sm">Lançamentos Incomuns</span>
             <AlertTriangle
               className={analytics.anomalies?.length > 0 ? "text-red-400" : "text-green-400"}
               size={20}
@@ -106,7 +106,7 @@ export const AdvancedAnalyticsDashboard = ({ filteredData }) => {
         {/* Income Stability */}
         <div className="bg-gradient-to-br from-green-900/30 to-green-800/20 border border-green-500/30 rounded-xl p-4">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-gray-400 text-sm">Income Stability</span>
+            <span className="text-gray-400 text-sm">Estabilidade de Renda</span>
             <DollarSign className="text-green-400" size={20} />
           </div>
           <div className="text-2xl font-bold text-white">
@@ -139,15 +139,15 @@ export const AdvancedAnalyticsDashboard = ({ filteredData }) => {
                     <div>
                       <p className="font-medium text-white">{sub.category}</p>
                       <p className="text-sm text-gray-400 mt-1">
-                        Every {sub.frequency.toFixed(0)} days
+                        A cada {sub.frequency.toFixed(0)} dias
                       </p>
                       <p className="text-xs text-gray-500 mt-1">
-                        Next: {sub.nextExpected.toLocaleDateString()}
+                        Próximo: {sub.nextExpected.toLocaleDateString("pt-BR")}
                       </p>
                     </div>
                     <div className="text-right">
                       <p className="text-lg font-bold text-blue-400">R${sub.amount.toFixed(0)}</p>
-                      <p className="text-xs text-gray-400">{sub.count} times</p>
+                      <p className="text-xs text-gray-400">{sub.count} vezes</p>
                     </div>
                   </div>
                 </div>
@@ -156,7 +156,7 @@ export const AdvancedAnalyticsDashboard = ({ filteredData }) => {
 
           <div className="mt-4 pt-4 border-t border-gray-700">
             <div className="flex justify-between items-center">
-              <span className="text-gray-400">Total Monthly Recurring</span>
+              <span className="text-gray-400">Total Recorrente Mensal</span>
               <span className="text-2xl font-bold text-purple-400">
                 R$
                 {analytics.recurringTransactions
@@ -174,7 +174,7 @@ export const AdvancedAnalyticsDashboard = ({ filteredData }) => {
         <div className="bg-red-900/20 border border-red-500/30 rounded-2xl p-6">
           <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
             <AlertTriangle className="text-red-400" size={24} />
-            Unusual Transactions ({analytics.anomalies.length})
+            Lançamentos Incomuns ({analytics.anomalies.length})
           </h3>
 
           <div className="space-y-3">
@@ -208,7 +208,7 @@ export const AdvancedAnalyticsDashboard = ({ filteredData }) => {
                     <p className="text-2xl font-bold text-white">
                       R${Math.abs(anom.amount).toFixed(0)}
                     </p>
-                    <p className="text-xs text-gray-400">{anom.deviation}σ deviation</p>
+                    <p className="text-xs text-gray-400">desvio de {anom.deviation}σ</p>
                   </div>
                 </div>
               </div>
@@ -222,24 +222,24 @@ export const AdvancedAnalyticsDashboard = ({ filteredData }) => {
         <div className="bg-gray-800/50 rounded-2xl p-6 border border-gray-700/50">
           <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
             <Target className="text-blue-400" size={24} />
-            30-Day Cash Flow Forecast
+            Previsão de fluxo de caixa para 30 dias
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <div className="bg-gray-700/50 rounded-lg p-4">
-              <p className="text-gray-400 text-sm mb-1">Daily Income</p>
+              <p className="text-gray-400 text-sm mb-1">Receita Diária</p>
               <p className="text-2xl font-bold text-green-400">
                 R${analytics.cashFlowForecast.dailyIncome.toFixed(0)}
               </p>
             </div>
             <div className="bg-gray-700/50 rounded-lg p-4">
-              <p className="text-gray-400 text-sm mb-1">Daily Expense</p>
+              <p className="text-gray-400 text-sm mb-1">Despesa Diária</p>
               <p className="text-2xl font-bold text-red-400">
                 R${analytics.cashFlowForecast.dailyExpense.toFixed(0)}
               </p>
             </div>
             <div className="bg-gray-700/50 rounded-lg p-4">
-              <p className="text-gray-400 text-sm mb-1">Net Daily</p>
+              <p className="text-gray-400 text-sm mb-1">Líquido Diário</p>
               <p
                 className={`text-2xl font-bold ${
                   analytics.cashFlowForecast.netDaily > 0 ? "text-green-400" : "text-red-400"
@@ -249,7 +249,7 @@ export const AdvancedAnalyticsDashboard = ({ filteredData }) => {
               </p>
             </div>
             <div className="bg-gray-700/50 rounded-lg p-4">
-              <p className="text-gray-400 text-sm mb-1">Forecasted (30d)</p>
+              <p className="text-gray-400 text-sm mb-1">Previsão (30d)</p>
               <p
                 className={`text-2xl font-bold ${
                   analytics.cashFlowForecast.forecastedBalance > 0
@@ -279,7 +279,7 @@ export const AdvancedAnalyticsDashboard = ({ filteredData }) => {
             </p>
             {analytics.cashFlowForecast.daysUntilZero !== Infinity && (
               <p className="text-sm text-gray-300 mt-1">
-                ⚠️ At current rate, balance reaches zero in{" "}
+                ⚠️ Na taxa atual, o saldo chega a zero em {" "}
                 {Math.floor(analytics.cashFlowForecast.daysUntilZero)} days
               </p>
             )}
@@ -290,7 +290,7 @@ export const AdvancedAnalyticsDashboard = ({ filteredData }) => {
       {/* Category Trends - Top 5 */}
       {analytics.categoryTrends && analytics.categoryTrends.length > 0 && (
         <div className="bg-gray-800/50 rounded-2xl p-6 border border-gray-700/50">
-          <h3 className="text-xl font-bold text-white mb-4">Category Growth Trends (Top 5)</h3>
+          <h3 className="text-xl font-bold text-white mb-4">Tendências de Crescimento por Categoria (Top 5)</h3>
 
           <div className="space-y-4">
             {analytics.categoryTrends.slice(0, 5).map((cat) => (
@@ -339,7 +339,7 @@ export const AdvancedAnalyticsDashboard = ({ filteredData }) => {
       {/* Monthly Health Ratio */}
       {analytics.monthlyHealthRatio && analytics.monthlyHealthRatio.length > 0 && (
         <div className="bg-gray-800/50 rounded-2xl p-6 border border-gray-700/50">
-          <h3 className="text-xl font-bold text-white mb-4">Monthly Financial Health</h3>
+          <h3 className="text-xl font-bold text-white mb-4">Saúde Financeira Mensal</h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {analytics.monthlyHealthRatio.slice(-6).map((month) => (
@@ -358,7 +358,7 @@ export const AdvancedAnalyticsDashboard = ({ filteredData }) => {
                 <p className="text-sm text-gray-400 mb-2">{month.month}</p>
                 <div className="flex items-baseline gap-2">
                   <span className="text-3xl font-bold text-white">{month.ratio.toFixed(0)}%</span>
-                  <span className="text-sm text-gray-400">of income</span>
+                  <span className="text-sm text-gray-400">da renda</span>
                 </div>
                 <p
                   className={(() => {
@@ -382,16 +382,16 @@ export const AdvancedAnalyticsDashboard = ({ filteredData }) => {
 
       {/* Summary Insights */}
       <div className="bg-gradient-to-br from-blue-900/30 to-purple-900/30 border border-blue-500/30 rounded-2xl p-6">
-        <h3 className="text-xl font-bold text-white mb-4">📊 Quick Summary</h3>
+        <h3 className="text-xl font-bold text-white mb-4">📊 Resumo Rápido</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <p className="text-gray-400 text-sm">Average Monthly Health</p>
+            <p className="text-gray-400 text-sm">Saúde Média Mensal</p>
             <p className="text-2xl font-bold text-white">
               {analytics.insights?.averageMonthlyHealth?.toFixed(1)}%
             </p>
           </div>
           <div>
-            <p className="text-gray-400 text-sm">Cash Flow Status</p>
+            <p className="text-gray-400 text-sm">Status do Fluxo de Caixa</p>
             <p className="text-2xl font-bold text-white capitalize">
               {analytics.insights?.cashFlowStatus}
             </p>

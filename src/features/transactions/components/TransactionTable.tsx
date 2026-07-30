@@ -519,7 +519,7 @@ export const EnhancedTransactionTable = ({
                   className="text-sm font-medium text-gray-300 flex items-center gap-2"
                 >
                   <CreditCard size={14} />
-                  Account
+                  Conta
                 </label>
                 <div className="relative">
                   <select
@@ -528,7 +528,7 @@ export const EnhancedTransactionTable = ({
                     onChange={(e) => handleFilterChange("account", e.target.value)}
                     className="w-full px-4 py-3 bg-gray-800/70 backdrop-blur-xl border border-gray-700/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 appearance-none cursor-pointer"
                   >
-                    <option value="">All Accounts</option>
+                    <option value="">Todas as contas</option>
                     {uniqueValues.accounts.map((account) => (
                       <option key={account} value={account}>
                         {account}

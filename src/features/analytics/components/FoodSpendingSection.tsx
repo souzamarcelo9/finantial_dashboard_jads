@@ -35,14 +35,14 @@ export const FoodSpendingSection = ({
     <div>
       <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
         <UtensilsCrossed className="text-green-400" size={28} />
-        Food Spending Analysis
+        Análise de gastos com alimentos
       </h3>
 
       {/* Food Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         <div className="bg-gray-800 rounded-lg p-4 border border-gray-700">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-gray-400 text-sm">Total Food Spending</span>
+            <span className="text-gray-400 text-sm">Gasto Total com Alimentação</span>
             <UtensilsCrossed className="text-green-400" size={20} />
           </div>
           <div className="text-2xl font-bold text-white">
@@ -55,7 +55,7 @@ export const FoodSpendingSection = ({
 
         <div className="bg-gray-800 rounded-lg p-4 border border-gray-700">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-gray-400 text-sm">Monthly Average</span>
+            <span className="text-gray-400 text-sm">Média Mensal</span>
             <ShoppingBag className="text-blue-400" size={20} />
           </div>
           <div className="text-2xl font-bold text-blue-400">
@@ -68,7 +68,7 @@ export const FoodSpendingSection = ({
 
         <div className="bg-gray-800 rounded-lg p-4 border border-gray-700">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-gray-400 text-sm">Daily Average</span>
+            <span className="text-gray-400 text-sm">Média Diária</span>
             <Coffee className="text-yellow-400" size={20} />
           </div>
           <div className="text-2xl font-bold text-yellow-400">
@@ -81,7 +81,7 @@ export const FoodSpendingSection = ({
 
         <div className="bg-gray-800 rounded-lg p-4 border border-gray-700">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-gray-400 text-sm">Delivery Apps</span>
+            <span className="text-gray-400 text-sm">Apps de Delivery</span>
             <ShoppingBag className="text-purple-400" size={20} />
           </div>
           <div className="text-2xl font-bold text-purple-400">
@@ -97,7 +97,7 @@ export const FoodSpendingSection = ({
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Food Category Breakdown */}
         <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
-          <h4 className="text-lg font-semibold text-white mb-4">Food Category Breakdown</h4>
+          <h4 className="text-lg font-semibold text-white mb-4">Detalhamento por Categoria de Alimentação</h4>
           <div style={{ height: "300px" }}>
             <Doughnut data={foodChartData} options={doughnutOptions} />
           </div>
@@ -105,7 +105,7 @@ export const FoodSpendingSection = ({
 
         {/* Monthly Food Trends */}
         <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
-          <h4 className="text-lg font-semibold text-white mb-4">Monthly Food Spending Trend</h4>
+          <h4 className="text-lg font-semibold text-white mb-4">Tendência Mensal de Gastos com Alimentação</h4>
           <div style={{ height: "300px" }}>
             <Line data={foodTrendsData} options={chartOptions} />
           </div>
@@ -115,7 +115,7 @@ export const FoodSpendingSection = ({
       {/* Food Insights */}
       {foodData.insights && foodData.insights.length > 0 && (
         <div className="mt-6 bg-gray-800 rounded-lg p-6 border border-gray-700">
-          <h4 className="text-lg font-semibold text-white mb-4">Food Spending Insights</h4>
+          <h4 className="text-lg font-semibold text-white mb-4">Insights de Gastos com Alimentação</h4>
           <div className="space-y-3">
             {foodData.insights.map((insight) => {
               let bgClass: string;

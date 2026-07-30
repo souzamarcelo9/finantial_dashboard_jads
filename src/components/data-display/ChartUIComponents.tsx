@@ -218,7 +218,7 @@ export const ChartWrapper = ({
   if (loading) {
     return (
       <div className={`${className} flex items-center justify-center`}>
-        <div className="text-gray-400">Loading chart...</div>
+        <div className="text-gray-400">Carregando gráfico...</div>
       </div>
     );
   }
@@ -226,7 +226,7 @@ export const ChartWrapper = ({
   if (error) {
     return (
       <div className={`${className} flex items-center justify-center`}>
-        <div className="text-red-400">Error: {error}</div>
+        <div className="text-red-400">Erro: {error}</div>
       </div>
     );
   }

@@ -39,14 +39,14 @@ export const CashbackSection = ({
     <div>
       <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
         <CreditCard className="text-blue-400" size={28} />
-        Credit Card Analytics
+        Análise de cartão de crédito
       </h3>
 
       {/* Credit Card Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         <div className="bg-gray-800 rounded-lg p-4 border border-gray-700">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-gray-400 text-sm">Total Spending</span>
+            <span className="text-gray-400 text-sm">Gasto Total</span>
             <CreditCard className="text-blue-400" size={20} />
           </div>
           <div className="text-2xl font-bold text-white">
@@ -59,7 +59,7 @@ export const CashbackSection = ({
 
         <div className="bg-gray-800 rounded-lg p-4 border border-gray-700">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-gray-400 text-sm">Cashback Earned</span>
+            <span className="text-gray-400 text-sm">Cashback Ganho</span>
             <Gift className="text-green-400" size={20} />
           </div>
           <div className="text-2xl font-bold text-green-400">
@@ -72,7 +72,7 @@ export const CashbackSection = ({
 
         <div className="bg-gray-800 rounded-lg p-4 border border-gray-700">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-gray-400 text-sm">Cashback Shared</span>
+            <span className="text-gray-400 text-sm">Cashback Compartilhado</span>
             <Gift className="text-yellow-400" size={20} />
           </div>
           <div className="text-2xl font-bold text-yellow-400">
@@ -85,7 +85,7 @@ export const CashbackSection = ({
 
         <div className="bg-gray-800 rounded-lg p-4 border border-gray-700">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-gray-400 text-sm">Cashback Rate</span>
+            <span className="text-gray-400 text-sm">Taxa de Cashback</span>
             <TrendingUp className="text-purple-400" size={20} />
           </div>
           <div className="text-2xl font-bold text-purple-400">
@@ -98,7 +98,7 @@ export const CashbackSection = ({
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Card Breakdown Chart */}
         <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
-          <h4 className="text-lg font-semibold text-white mb-4">Spending by Card</h4>
+          <h4 className="text-lg font-semibold text-white mb-4">Gastos por Cartão</h4>
           <div style={{ height: "300px" }}>
             <Doughnut data={cardChartData} options={doughnutOptions} />
           </div>
@@ -106,7 +106,7 @@ export const CashbackSection = ({
 
         {/* Cashback by Card */}
         <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
-          <h4 className="text-lg font-semibold text-white mb-4">Top Cards by Cashback</h4>
+          <h4 className="text-lg font-semibold text-white mb-4">Principais Cartões por Cashback</h4>
           <div className="space-y-3">
             {topCards.map((card) => (
               <div

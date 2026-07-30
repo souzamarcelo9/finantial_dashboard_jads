@@ -1,0 +1,124 @@
+diff --git a/src/features/charts/components/ChartComponents.tsx b/src/features/charts/components/ChartComponents.tsx
+index b8914ba..2746069 100644
+--- a/src/features/charts/components/ChartComponents.tsx
++++ b/src/features/charts/components/ChartComponents.tsx
+@@ -413,7 +413,7 @@ export const EnhancedSpendingByAccountChart = ({ filteredData, chartRef }: Chart
+         ) : (
+           <div className="flex items-center justify-center h-full text-gray-400">
+             <div className="text-center">
+-              <div className="text-4xl mb-2">ðŸ“Š</div>
++              <div className="text-4xl mb-2">📊</div>
+               <div>No spending data available</div>
+               <div className="text-sm">for the selected period</div>
+             </div>
+@@ -1453,11 +1453,11 @@ export const NetWorthTrendChart = ({ filteredData, chartRef }) => {
+             callback: (value) => {
+               const formatCurrency = (val) => {
+                 if (Math.abs(val) >= 1000000) {
+-                  return `â‚¹${(val / 1000000).toFixed(1)}M`;
++                  return `R$${(val / 1000000).toFixed(1)}M`;
+                 } else if (Math.abs(val) >= 1000) {
+-                  return `â‚¹${(val / 1000).toFixed(0)}K`;
++                  return `R$${(val / 1000).toFixed(0)}K`;
+                 }
+-                return `â‚¹${val.toFixed(0)}`;
++                return `R$${val.toFixed(0)}`;
+               };
+               return formatCurrency(value);
+             },
+@@ -1722,7 +1722,7 @@ export const NetWorthTrendChart = ({ filteredData, chartRef }) => {
+         ) : (
+           <div className="flex items-center justify-center h-full text-gray-400">
+             <div className="text-center">
+-              <div className="text-4xl mb-2">ðŸ“ˆ</div>
++              <div className="text-4xl mb-2">📈</div>
+               <div>No financial data available</div>
+               <div className="text-sm">for the selected period</div>
+             </div>
+@@ -2234,7 +2234,7 @@ export const CumulativeCategoryTrendChart = ({ filteredData, chartRef }) => {
+         ) : (
+           <div className="flex items-center justify-center h-full text-gray-400">
+             <div className="text-center">
+-              <div className="text-4xl mb-2">ðŸ“Š</div>
++              <div className="text-4xl mb-2">📊</div>
+               <div>
+                 {selectedCategories.size === 0
+                   ? "Selecione as categorias para exibir"
+@@ -3744,7 +3744,7 @@ export const SankeyFlowChart = ({ filteredData, chartRef }) => {
+     <div className="lg:col-span-2 bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700 h-[600px] flex flex-col">
+       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+         <div>
+-          <h3 className="text-xl font-bold text-white mb-2">â‚¹ Money Flow Analysis</h3>
++          <h3 className="text-xl font-bold text-white mb-2">💰 Análise de Fluxo Financeiro</h3>
+           <p className="text-gray-400 text-sm">
+             Visualize how money flows from income sources to expense categories
+           </p>
+@@ -3756,11 +3756,11 @@ export const SankeyFlowChart = ({ filteredData, chartRef }) => {
+             onChange={(e) => setTimeRange(e.target.value)}
+             className="bg-gray-700 text-white border border-gray-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+           >
+-            <option value="all">All Time</option>
+-            <option value="1month">Last Month</option>
+-            <option value="3months">Last 3 Months</option>
+-            <option value="6months">Last 6 Months</option>
+-            <option value="1year">Last Year</option>
++            <option value="all">Todo o Período</option>
++            <option value="1month">Último Mês</option>
++            <option value="3months">Últimos 3 Meses</option>
++            <option value="6months">Últimos 6 Meses</option>
++            <option value="1year">Último Ano</option>
+           </select>
+ 
+           <select
+@@ -3768,17 +3768,17 @@ export const SankeyFlowChart = ({ filteredData, chartRef }) => {
+             onChange={(e) => setMinFlowAmount(Number(e.target.value))}
+             className="bg-gray-700 text-white border border-gray-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+           >
+-            <option value={50}>Min: â‚¹50</option>
+-            <option value={100}>Min: â‚¹100</option>
+-            <option value={500}>Min: â‚¹500</option>
+-            <option value={1000}>Min: â‚¹1000</option>
++            <option value={50}>Min: R$50</option>
++            <option value={100}>Min: R$100</option>
++            <option value={500}>Min: R$500</option>
++            <option value={1000}>Min: R$1000</option>
+           </select>
+ 
+           <button
+             onClick={() => exportToCSV(filteredData, "money_flow_analysis.csv")}
+             className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 flex items-center gap-2 text-sm"
+           >
+-            ðŸ“Š Export
++            📊 Exportar
+           </button>
+         </div>
+       </div>
+@@ -3804,7 +3804,7 @@ export const SankeyFlowChart = ({ filteredData, chartRef }) => {
+                 fontWeight="bold"
+                 textAnchor="middle"
+               >
+-                â‚¹ Income Sources
++                💰 Fontes de Receita
+               </text>
+               <text
+                 x={width - 120}
+@@ -3814,7 +3814,7 @@ export const SankeyFlowChart = ({ filteredData, chartRef }) => {
+                 fontWeight="bold"
+                 textAnchor="middle"
+               >
+-                â‚¹ Expense Categories
++                💰 Categorias de Despesa
+               </text>
+ 
+               {/* Links (flows) */}
+@@ -3893,8 +3893,8 @@ export const SankeyFlowChart = ({ filteredData, chartRef }) => {
+         ) : (
+           <div className="flex items-center justify-center h-full text-gray-400">
+             <div className="text-center">
+-              <div className="text-4xl mb-3">ðŸ”„</div>
+-              <div className="text-lg mb-2">No flow data available</div>
++              <div className="text-4xl mb-3">🔄</div>
++              <div className="text-lg mb-2">Nenhum dado de fluxo disponível</div>
+               <div className="text-sm">
+                 {filteredData.length === 0
+                   ? "Envie os dados de lançamentos para ver a análise de fluxo financeiro"

@@ -58,7 +58,7 @@ export const CommuteSection = ({ commuteData, chartOptions }: CommuteSectionProp
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <div className="bg-gray-800 rounded-lg p-4 border border-gray-700">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-gray-400 text-sm">Total Commute</span>
+            <span className="text-gray-400 text-sm">Transporte Total</span>
             <TrendingUp className="text-purple-400" size={20} />
           </div>
           <div className="text-2xl font-bold text-white">
@@ -71,7 +71,7 @@ export const CommuteSection = ({ commuteData, chartOptions }: CommuteSectionProp
 
         <div className="bg-gray-800 rounded-lg p-4 border border-gray-700">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-gray-400 text-sm">Monthly Average</span>
+            <span className="text-gray-400 text-sm">Média Mensal</span>
             <TrendingUp className="text-blue-400" size={20} />
           </div>
           <div className="text-2xl font-bold text-blue-400">
@@ -84,7 +84,7 @@ export const CommuteSection = ({ commuteData, chartOptions }: CommuteSectionProp
 
         <div className="bg-gray-800 rounded-lg p-4 border border-gray-700">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-gray-400 text-sm">Daily Average</span>
+            <span className="text-gray-400 text-sm">Média Diária</span>
             <TrendingUp className="text-green-400" size={20} />
           </div>
           <div className="text-2xl font-bold text-green-400">
@@ -99,7 +99,7 @@ export const CommuteSection = ({ commuteData, chartOptions }: CommuteSectionProp
       {/* Commute Charts */}
       <div className="grid grid-cols-1 gap-6">
         <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
-          <h4 className="text-lg font-semibold text-white mb-4">Commute Category Breakdown</h4>
+          <h4 className="text-lg font-semibold text-white mb-4">Detalhamento por Categoria de Transporte</h4>
           <div style={{ height: "300px" }}>
             <Bar data={commuteChartData} options={chartOptions} />
           </div>
@@ -109,7 +109,7 @@ export const CommuteSection = ({ commuteData, chartOptions }: CommuteSectionProp
       {/* Commute Insights */}
       {commuteData.insights && commuteData.insights.length > 0 && (
         <div className="mt-6 bg-gray-800 rounded-lg p-6 border border-gray-700">
-          <h4 className="text-lg font-semibold text-white mb-4">Commute Insights</h4>
+          <h4 className="text-lg font-semibold text-white mb-4">Insights de Transporte</h4>
           <div className="space-y-3">
             {commuteData.insights.map((insight) => {
               let bgClass: string;

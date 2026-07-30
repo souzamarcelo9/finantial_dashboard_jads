@@ -25,7 +25,7 @@ export const TrendsForecastsPage = ({ chartRefs, filteredData }) => {
       {/* Cumulative & Advanced Analytics - Merged Section */}
       <div className="bg-gray-800/50 rounded-2xl p-6">
         <h2 className="text-2xl font-bold text-white mb-6">
-          Cumulative & Advanced Financial Analytics
+          Análise financeira cumulativa e avançada
         </h2>
         <div className="grid grid-cols-1 gap-6">
           {/* Cumulative Category Trend */}

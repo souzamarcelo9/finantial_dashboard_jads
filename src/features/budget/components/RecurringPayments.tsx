@@ -90,12 +90,12 @@ export const RecurringPayments = ({ filteredData }: RecurringPaymentsProps) => {
     return (
       <div>
         <h2 className="text-2xl font-bold text-white mb-4">
-          🔄 Recurring Payments & Subscriptions
+          🔄 Pagamentos Recorrentes e Assinaturas
         </h2>
         <div className="text-center py-12 text-gray-400">
           <p>Nenhum pagamento recorrente detectado</p>
           <p className="text-sm mt-2">
-            Need at least 2 similar transactions with consistent intervals
+            São necessárias pelo menos 2 transações semelhantes com intervalos consistentes.
           </p>
         </div>
       </div>
@@ -107,10 +107,10 @@ export const RecurringPayments = ({ filteredData }: RecurringPaymentsProps) => {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            🔄 Recurring Payments & Subscriptions
+            🔄 Pagamentos Recorrentes e Assinaturas
           </h2>
           <p className="text-gray-400 mt-1">
-            Auto-detected from transaction patterns •{" "}
+            Detectado automaticamente a partir de padrões de transação•{" "}
             <span className="text-green-400">{activePayments.length} active</span>
             {inactivePayments.length > 0 && (
               <span className="text-gray-500"> • {inactivePayments.length} inactive</span>
@@ -123,7 +123,7 @@ export const RecurringPayments = ({ filteredData }: RecurringPaymentsProps) => {
             R${totalMonthly.toLocaleString("pt-BR", { maximumFractionDigits: 0 })}
           </p>
           <p className="text-gray-400 text-xs mt-1">
-            {activePayments.length} active subscription
+            {activePayments.length} inscrições ativas
             {activePayments.length === 1 ? "" : "s"}
           </p>
         </div>
@@ -134,7 +134,7 @@ export const RecurringPayments = ({ filteredData }: RecurringPaymentsProps) => {
         <div className="mb-6">
           <h3 className="text-lg font-semibold text-green-400 mb-3 flex items-center gap-2">
             <CheckCircle size={20} />
-            Active Subscriptions ({activePayments.length})
+            Inscrições Ativas ({activePayments.length})
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {activePayments.map((payment, index) => {
@@ -165,7 +165,7 @@ export const RecurringPayments = ({ filteredData }: RecurringPaymentsProps) => {
                     <div className="flex justify-between items-center">
                       <span className="text-gray-400 text-sm flex items-center gap-1">
                         <TrendingUp size={14} />
-                        Amount
+                        Montante
                       </span>
                       <span className="text-white font-bold">
                         R$
@@ -189,7 +189,7 @@ export const RecurringPayments = ({ filteredData }: RecurringPaymentsProps) => {
                     <div className="flex justify-between items-center">
                       <span className="text-gray-400 text-sm flex items-center gap-1">
                         <Calendar size={14} />
-                        Last Payment
+                        Último Pagamento
                       </span>
                       <span className="text-gray-300 text-xs">
                         {formatDate(payment.lastOccurrence)}

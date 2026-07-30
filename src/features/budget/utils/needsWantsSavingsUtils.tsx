@@ -503,7 +503,7 @@ export const generateNWSInsights = (breakdown, income) => {
     insights.push({
       type: "warning",
       category: "needs",
-      message: `Your essential needs spending is ${comparison.needs.difference.toFixed(1)}% higher than recommended. Consider reviewing fixed expenses.`,
+      message: `Seus gastos com necessidades essenciais são ${comparison.needs.difference.toFixed(1)}% maiores do que o recomendado. Considere revisar as despesas fixas.`,
       priority: "high",
     });
   }
@@ -513,7 +513,7 @@ export const generateNWSInsights = (breakdown, income) => {
     insights.push({
       type: "warning",
       category: "wants",
-      message: `Discretionary spending is ${comparison.wants.difference.toFixed(1)}% above the ideal allocation. Look for areas to cut back.`,
+      message: `Gastos discricionários estão ${comparison.wants.difference.toFixed(1)}% acima do ideal alocado. Procure áreas onde possa reduzir gastos.`,
       priority: "medium",
     });
   }
@@ -523,14 +523,14 @@ export const generateNWSInsights = (breakdown, income) => {
     insights.push({
       type: "critical",
       category: "savings",
-      message: `Your savings rate is ${Math.abs(comparison.savings.difference).toFixed(1)}% below recommended. Prioritize increasing savings.`,
+      message: `Sua taxa de poupança está ${Math.abs(comparison.savings.difference).toFixed(1)}% abaixo do recomendado. Priorize o aumento da poupança.`,
       priority: "high",
     });
   } else if (comparison.savings.difference > 10) {
     insights.push({
       type: "success",
       category: "savings",
-      message: `Great job! Your savings rate is ${comparison.savings.difference.toFixed(1)}% above the recommended 20%.`,
+      message: `Excelente trabalho! Sua taxa de poupança está  ${comparison.savings.difference.toFixed(1)}% acima do nível recomendado 20%.`,
       priority: "low",
     });
   }
@@ -544,7 +544,7 @@ export const generateNWSInsights = (breakdown, income) => {
       insights.push({
         type: "critical",
         category: "overall",
-        message: `You're spending ${spendingRatio.toFixed(1)}% of your income. This leaves little room for savings or emergencies.`,
+        message: `Você está gastando ${spendingRatio.toFixed(1)}% dos seus ganhos. Isso deixa uma margem pequena para poupanças ou emergencias.`,
         priority: "high",
       });
     }

@@ -204,8 +204,8 @@ const CreditCardFoodOptimizer = ({ filteredData }: CreditCardFoodOptimizerProps)
     <div className="space-y-6">
       {/* Header */}
       <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-6 shadow-lg">
-        <h2 className="text-2xl font-bold text-white mb-2">💳 Lifestyle Spending Optimizer</h2>
-        <p className="text-blue-100">Optimize credit cards, food spending, and commute costs</p>
+        <h2 className="text-2xl font-bold text-white mb-2">💳 Otimizador de Gastos com Estilo de Vida</h2>
+        <p className="text-blue-100">Otimize cartões de crédito, gastos com alimentação e transporte</p>
       </div>
 
       {/* Cashback Section */}
@@ -251,21 +251,21 @@ interface OptimizationTipsProps {
  */
 const OptimizationTips = ({ foodData, creditCardData, commuteData }: OptimizationTipsProps) => (
   <div className="bg-gradient-to-br from-purple-900/50 to-blue-900/50 rounded-xl p-6 shadow-lg border border-purple-700/50">
-    <h3 className="text-xl font-bold text-white mb-4">💡 Optimization Tips</h3>
+    <h3 className="text-xl font-bold text-white mb-4">💡 Dicas de Otimização</h3>
     <div className="space-y-3">
       {foodData.deliveryApps > foodData.groceries && (
         <div className="flex items-start gap-3 bg-orange-500/10 border border-orange-500/30 rounded-lg p-4">
           <UtensilsCrossed className="text-orange-400 mt-0.5" size={20} />
           <div>
-            <p className="text-orange-300 font-medium">Reduce Delivery App Usage</p>
+            <p className="text-orange-300 font-medium">Reduza o Uso de Apps de Delivery</p>
             <p className="text-orange-200/80 text-sm mt-1">
-              You're spending R$
-              {(foodData.deliveryApps - foodData.groceries).toLocaleString("pt-BR")} more on
-              delivery apps than groceries. Cooking at home could save you R$
+              Você está gastando R$
+              {(foodData.deliveryApps - foodData.groceries).toLocaleString("pt-BR")} a mais em
+              apps de delivery do que em supermercado. Cozinhar em casa pode economizar R$
               {((foodData.deliveryApps - foodData.groceries) * 0.6).toLocaleString("pt-BR", {
                 maximumFractionDigits: 0,
               })}{" "}
-              per month.
+              por mês.
             </p>
           </div>
         </div>
@@ -275,17 +275,17 @@ const OptimizationTips = ({ foodData, creditCardData, commuteData }: Optimizatio
         <div className="flex items-start gap-3 bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
           <CreditCard className="text-blue-400 mt-0.5" size={20} />
           <div>
-            <p className="text-blue-300 font-medium">Optimize Credit Card Rewards</p>
+            <p className="text-blue-300 font-medium">Otimize as Recompensas do Cartão de Crédito</p>
             <p className="text-blue-200/80 text-sm mt-1">
-              Your cashback rate is {creditCardData.cashbackRate.toFixed(2)}%. Consider cards with
-              higher rewards (3-5%) to earn R$
+              Sua taxa de cashback é de {creditCardData.cashbackRate.toFixed(2)}%. Considere cartões
+              com recompensas maiores (3-5%) para ganhar R$
               {(
                 creditCardData.totalCreditCardSpending * 0.03 -
                 creditCardData.totalCashback
               ).toLocaleString("pt-BR", {
                 maximumFractionDigits: 0,
               })}{" "}
-              more in cashback.
+              a mais em cashback.
             </p>
           </div>
         </div>
@@ -295,10 +295,10 @@ const OptimizationTips = ({ foodData, creditCardData, commuteData }: Optimizatio
         <div className="flex items-start gap-3 bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
           <TrendingUp className="text-cyan-400 mt-0.5" size={20} />
           <div>
-            <p className="text-cyan-300 font-medium">Consider Monthly Pass or Bike</p>
+            <p className="text-cyan-300 font-medium">Considere um Passe Mensal ou Bicicleta</p>
             <p className="text-cyan-200/80 text-sm mt-1">
-              You've spent R${commuteData.dailyCommute.toLocaleString("pt-BR")} on daily commute. A
-              monthly pass or buying a bike could save you money in the long run.
+              Você gastou R${commuteData.dailyCommute.toLocaleString("pt-BR")} com transporte diário.
+              Um passe mensal ou uma bicicleta pode economizar dinheiro a longo prazo.
             </p>
           </div>
         </div>

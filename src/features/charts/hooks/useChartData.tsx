@@ -158,7 +158,7 @@ export const useChartData = (
       labels: sortedMonths.map(formatMonthLabel),
       datasets: [
         {
-          label: "Income",
+          label: "Ganhos",
           data: sortedMonths.map((m) => monthly[m].income),
           borderColor: "#22c55e",
           backgroundColor: "#22c55e",
@@ -166,7 +166,7 @@ export const useChartData = (
           fill: false,
         },
         {
-          label: "Expense",
+          label: "Gastos",
           data: sortedMonths.map((m) => monthly[m].expense),
           borderColor: "#ef4444",
           backgroundColor: "#ef4444",

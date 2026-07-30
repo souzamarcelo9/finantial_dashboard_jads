@@ -47,13 +47,13 @@ const ScoreDisplay = ({ score }: ScoreDisplayProps) => (
     <div
       className={`bg-gradient-to-br ${getGradient(score?.score || 0)} rounded-xl p-6 text-center`}
     >
-      <p className="text-white/80 text-sm mb-2">Overall Score</p>
+      <p className="text-white/80 text-sm mb-2">Pontuação geral</p>
       <p className={`text-6xl font-bold ${getScoreColor(score?.score || 0)}`}>
         {score?.score || 0}
       </p>
-      <p className="text-white/60 text-sm mt-1">out of 100</p>
+      <p className="text-white/60 text-sm mt-1">de 100</p>
       <div className="mt-4 pt-4 border-t border-white/20">
-        <p className="text-white text-xl font-bold">Grade: {score?.grade || "N/A"}</p>
+        <p className="text-white text-xl font-bold">Nota: {score?.grade || "N/A"}</p>
       </div>
     </div>
   </div>
@@ -120,7 +120,7 @@ export const FinancialHealthScore = ({
 
   return (
     <div className="bg-gray-800/50 rounded-2xl p-6">
-      <h2 className="text-2xl font-bold text-white mb-6">Financial Health Score</h2>
+      <h2 className="text-2xl font-bold text-white mb-6">Pontuação de saúde financeira</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Main Score */}
@@ -143,15 +143,15 @@ export const FinancialHealthScore = ({
             </div>
 
             <div className="bg-gray-700/50 rounded-lg p-4">
-              <p className="text-gray-400 text-sm">Emergency Fund</p>
+              <p className="text-gray-400 text-sm">Fundo Emergencial</p>
               <p className="text-2xl font-bold text-white mt-1">
-                {score?.monthsCovered || 0} months
+                {score?.monthsCovered || 0} meses
               </p>
               <p className="text-gray-400 text-xs mt-1">
                 R${Number.parseInt(score?.emergencyFundAmount || 0, 10).toLocaleString("pt-BR")} / R$
                 {Number.parseInt(score?.averageMonthlyExpenses || 0, 10).toLocaleString("pt-BR")}
               </p>
-              <p className="text-gray-500 text-xs">Cash / Avg Monthly</p>
+              <p className="text-gray-500 text-xs">Dinheiro / Média Mensal</p>
               <div className="mt-2 h-2 bg-gray-600 rounded-full overflow-hidden">
                 <div
                   className="h-full bg-gradient-to-r from-green-600 to-blue-600"
@@ -166,43 +166,43 @@ export const FinancialHealthScore = ({
           {/* Assets Breakdown */}
           <div className="grid grid-cols-4 gap-3">
             <div className="bg-gray-700/50 rounded-lg p-3">
-              <p className="text-gray-400 text-xs">Liquid Assets</p>
+              <p className="text-gray-400 text-xs">Ativos Líquidos</p>
               <p className="text-xl font-bold text-green-400 mt-1">
                 R${Number.parseInt(score?.totalLiquidAssets || 0, 10).toLocaleString("pt-BR")}
               </p>
-              <p className="text-gray-400 text-xs mt-1">Bank</p>
+              <p className="text-gray-400 text-xs mt-1">Banco</p>
             </div>
 
             <div className="bg-gray-700/50 rounded-lg p-3">
-              <p className="text-gray-400 text-xs">Investments</p>
+              <p className="text-gray-400 text-xs">Investimentos</p>
               <p className="text-xl font-bold text-blue-400 mt-1">
                 R${Number.parseInt(score?.totalInvestments || 0, 10).toLocaleString("pt-BR")}
               </p>
-              <p className="text-gray-400 text-xs mt-1">MF, Stocks</p>
+              <p className="text-gray-400 text-xs mt-1">MF,Ações</p>
             </div>
 
             <div className="bg-gray-700/50 rounded-lg p-3">
-              <p className="text-gray-400 text-xs">Deposits</p>
+              <p className="text-gray-400 text-xs">Depósitos</p>
               <p className="text-xl font-bold text-purple-400 mt-1">
                 R${Number.parseInt(score?.totalDeposits || 0, 10).toLocaleString("pt-BR")}
               </p>
-              <p className="text-gray-400 text-xs mt-1">FD, Loans</p>
+              <p className="text-gray-400 text-xs mt-1">FD, Empréstimos</p>
             </div>
 
             <div className="bg-gray-700/50 rounded-lg p-3">
-              <p className="text-gray-400 text-xs">Debt</p>
+              <p className="text-gray-400 text-xs">Dívidas</p>
               <p className="text-xl font-bold text-red-400 mt-1">
                 R${Number.parseInt(score?.totalDebt || 0, 10).toLocaleString("pt-BR")}
               </p>
               <p className="text-gray-400 text-xs mt-1">
-                {Number.parseFloat(score?.debtToIncomeRatio || 0).toFixed(1)}% of income
+                {Number.parseFloat(score?.debtToIncomeRatio || 0).toFixed(1)}% da renda
               </p>
             </div>
           </div>
 
           {/* Metric Scores */}
           <div className="bg-gray-700/50 rounded-lg p-4">
-            <p className="text-white font-medium mb-3">Score Breakdown</p>
+            <p className="text-white font-medium mb-3">Análise da pontuação</p>
             <div className="space-y-3">
               {score?.metrics &&
                 Object.entries(score.metrics).map(([key, value]) => {
@@ -285,7 +285,7 @@ export const FinancialHealthScore = ({
       {/* Recommendations */}
       {recommendations.length > 0 && (
         <div className="mt-6 pt-6 border-t border-gray-700">
-          <h3 className="text-lg font-semibold text-white mb-4">Recommendations</h3>
+          <h3 className="text-lg font-semibold text-white mb-4">Recomendações</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {recommendations.map((rec: RecommendationCardProps["rec"], index: number) => (
               <RecommendationCard

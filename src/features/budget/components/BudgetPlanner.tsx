@@ -144,9 +144,9 @@ export const BudgetPlanner = ({ filteredData }: BudgetPlannerProps) => {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-2xl font-bold text-white">💰 Budget Planner</h2>
+          <h2 className="text-2xl font-bold text-white">💰 Planejador de Orçamento</h2>
           <p className="text-gray-400 mt-1">
-            Track spending against budgets with 3-month trend analysis
+            Acompanhe os gastos em relação aos orçamentos com análise de tendências de 3 meses
           </p>
         </div>
         <div className="flex gap-3">
@@ -157,21 +157,21 @@ export const BudgetPlanner = ({ filteredData }: BudgetPlannerProps) => {
                 onClick={applySuggestedBudgets}
                 className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
               >
-                Use Suggested
+                Usar Sugestão
               </button>
               <button
                 type="button"
                 onClick={cancelEdit}
                 className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors"
               >
-                Cancel
+                Cancelar
               </button>
               <button
                 type="button"
                 onClick={saveBudgetChanges}
                 className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
               >
-                Save Budgets
+                Salvar Orçamento
               </button>
             </>
           ) : (
@@ -180,7 +180,7 @@ export const BudgetPlanner = ({ filteredData }: BudgetPlannerProps) => {
               onClick={() => setEditMode(true)}
               className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
             >
-              Edit Budgets
+              Editar Orçamentos
             </button>
           )}
         </div>
@@ -293,7 +293,7 @@ export const BudgetPlanner = ({ filteredData }: BudgetPlannerProps) => {
 
                 {!budget && !editMode && (
                   <p className="text-xs text-gray-500">
-                    No budget set • 3-Month Avg: R${Math.round(average).toLocaleString()}
+                    Nenhum orçamento configurado • 3-Meses Média: R${Math.round(average).toLocaleString()}
                   </p>
                 )}
               </div>
@@ -305,7 +305,7 @@ export const BudgetPlanner = ({ filteredData }: BudgetPlannerProps) => {
       {/* Recurring Payments */}
       {recurringPayments.length > 0 && (
         <div className="bg-gray-800/50 rounded-xl p-6">
-          <h3 className="text-lg font-semibold text-white mb-4">🔄 Recurring Payments Detected</h3>
+          <h3 className="text-lg font-semibold text-white mb-4">🔄 Pagamentos Recorrentes Detectados</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {recurringPayments.slice(0, 6).map((payment) => (
               <div
@@ -320,7 +320,7 @@ export const BudgetPlanner = ({ filteredData }: BudgetPlannerProps) => {
                   R${payment.amount.toLocaleString()}
                 </p>
                 <div className="text-xs text-gray-400 space-y-1">
-                  <p>Next Payment: {payment.nextDate.toLocaleDateString()}</p>
+                  <p>Próximo Pagamento: {payment.nextDate.toLocaleDateString()}</p>
                   <p>Occurrences: {payment.occurrences}</p>
                 </div>
               </div>
@@ -333,9 +333,8 @@ export const BudgetPlanner = ({ filteredData }: BudgetPlannerProps) => {
       {editMode && (
         <div className="bg-blue-900/20 border border-blue-500/30 rounded-xl p-4">
           <p className="text-blue-400 text-sm">
-            💡 <strong>Tip:</strong> Click "Usar Sugerido" to automatically set budgets based on
-            your 3-month average spending (with 10% buffer). You can then adjust individual
-            categories as needed.
+            💡 <strong>Dica:</strong> Clique "Usar Sugerido" para automaticamente configurar orçamento com base na
+             média dos seus 3 últimos meses de gasto. Você pode então ajustar as categorias individualmente se necessário.
           </p>
         </div>
       )}

@@ -11,9 +11,9 @@ export const PatternsPage = ({ filteredData }) => {
     <div className="space-y-8">
       {/* Section Header */}
       <div className="text-center">
-        <h1 className="text-3xl font-bold text-white mb-2">🔁 Subscriptions & Patterns</h1>
+        <h1 className="text-3xl font-bold text-white mb-2">🔁 Assinaturas e Padrões</h1>
         <p className="text-gray-400">
-          Track recurring expenses and discover advanced spending patterns
+          Acompanhe despesas recorrentes e descubra padrões avançados de gastos
         </p>
       </div>
 
@@ -30,7 +30,7 @@ export const PatternsPage = ({ filteredData }) => {
       {/* Advanced Analytics */}
       <div>
         <h2 className="text-2xl font-bold text-white mb-4 flex items-center">
-          <span className="mr-3">📊</span> Advanced Analytics
+          <span className="mr-3">📊</span> Análises Avançadas
         </h2>
         <div id="advanced-analytics">
           <AdvancedAnalyticsDashboard filteredData={filteredData} />

@@ -547,21 +547,21 @@ export const generateRecommendations = (budgetComparison, healthScore) => {
     recommendations.push({
       type: "alert",
       category: "Poupança",
-      message: `Low savings rate: ${savingsRate.toFixed(1)}% (Target: 20%+)`,
+      message: `Baixa taxa de poupança: ${savingsRate.toFixed(1)}% (Meta: 20%+)`,
       action: "Busque poupar pelo menos 10-20% da sua renda mensal",
     });
   } else if (savingsRate < 20) {
     recommendations.push({
       type: "tip",
       category: "Poupança",
-      message: `Good savings rate: ${savingsRate.toFixed(1)}%`,
-      action: "Increase to 20%+ for excellent financial health",
+      message: `Boa taxa de poupança: ${savingsRate.toFixed(1)}%`,
+      action: "Aumente mais 20%+ para ter uma excelente sáude financeira",
     });
   } else {
     recommendations.push({
       type: "success",
       category: "Poupança",
-      message: `Excellent savings rate: ${savingsRate.toFixed(1)}%! 🎉`,
+      message: `Excelente taxa de poupança: ${savingsRate.toFixed(1)}%! 🎉`,
       action: "Continue com seus hábitos disciplinados de poupança",
     });
   }
@@ -571,21 +571,21 @@ export const generateRecommendations = (budgetComparison, healthScore) => {
     recommendations.push({
       type: "alert",
       category: "Reserva de Emergência",
-      message: `Emergency fund covers only ${monthsCovered.toFixed(1)} months`,
+      message: `O fundo de emergência cobre apenas ${monthsCovered.toFixed(1)} meses`,
       action: "Construa uma reserva de emergência para cobrir de 3 a 6 meses de despesas",
     });
   } else if (monthsCovered < 6) {
     recommendations.push({
       type: "tip",
       category: "Reserva de Emergência",
-      message: `Emergency fund covers ${monthsCovered.toFixed(1)} months`,
-      action: "Almost there! Target is 6 months coverage",
+      message: `Fundo emergencial cobre ${monthsCovered.toFixed(1)} meses`,
+      action: "Quase lá! Meta são 6 meses de cobertura",
     });
   } else {
     recommendations.push({
       type: "success",
       category: "Reserva de Emergência",
-      message: `Strong emergency fund: ${monthsCovered.toFixed(1)} months! 💪`,
+      message: `Fundo emergencial forte : ${monthsCovered.toFixed(1)} meses! 💪`,
       action: "Bem protegido contra emergências financeiras",
     });
   }
@@ -595,14 +595,14 @@ export const generateRecommendations = (budgetComparison, healthScore) => {
     recommendations.push({
       type: "alert",
       category: "Debt",
-      message: `High debt-to-income ratio: ${debtRatio.toFixed(1)}%`,
-      action: "Prioritize debt repayment - aim for <36% of annual income",
+      message: `Alta relação dívida/renda: ${debtRatio.toFixed(1)}%`,
+      action: "Priorize a quitação de dívidas – busque manter o valor abaixo de 36% da renda anual.",
     });
   } else if (debtRatio > 30) {
     recommendations.push({
       type: "warning",
       category: "Debt",
-      message: `Moderate debt burden: ${debtRatio.toFixed(1)}%`,
+      message: `Nível moderado de endividamento: ${debtRatio.toFixed(1)}%`,
       action: "Mantenha as dívidas sob controle e evite contrair mais",
     });
   }
@@ -612,7 +612,7 @@ export const generateRecommendations = (budgetComparison, healthScore) => {
     recommendations.push({
       type: "success",
       category: "Geral",
-      message: "Excellent financial health! 🌟",
+      message: "Excelente saúde financeira! 🌟",
       action: "Mantenha seus ótimos hábitos financeiros",
     });
   } else if (score >= 60) {
@@ -627,7 +627,7 @@ export const generateRecommendations = (budgetComparison, healthScore) => {
       type: "warning",
       category: "Geral",
       message: "A saúde financeira precisa de atenção",
-      action: "Focus on: 1) Reduce expenses 2) Increase savings 3) Build emergency fund",
+      action: "Foque em: 1) Reduzir gastos 2) Aumentar poupança 3) Construir fundo emergencial",
     });
   }
 

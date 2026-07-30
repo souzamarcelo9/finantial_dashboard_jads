@@ -25,7 +25,7 @@ export const analyzeDayOfWeekPatterns = (transactions: Transaction[]): DayPatter
 
   const expenses = transactions.filter((t) => t.type === "Expense" && t.category !== "In-pocket");
 
-  const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const dayNames = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
 
   const dayData = dayNames.map(() => ({ total: 0, count: 0 }));
 
@@ -48,9 +48,9 @@ export const analyzeDayOfWeekPatterns = (transactions: Transaction[]): DayPatter
     insights.push({
       type: "pattern" as const,
       priority: "medium" as const,
-      title: `${dayNames[maxDay]} is Your Peak Spending Day`,
-      message: `You spend ${maxDayPercent}% more on ${dayNames[maxDay]}s compared to average (R$${dayData[maxDay].total.toLocaleString()})`,
-      action: "Consider meal prepping or avoiding shopping on this day",
+      title: `${dayNames[maxDay]} é o Seu Dia de Pico de Gastos`,
+      message: `Você gasta ${maxDayPercent}% a mais ${dayNames[maxDay] === "Sábado" || dayNames[maxDay] === "Domingo" ? "aos" : "às"} ${dayNames[maxDay]}s em relação à média (R$${dayData[maxDay].total.toLocaleString("pt-BR")})`,
+      action: "Considere preparar refeições com antecedência ou evitar compras nesse dia",
     });
   }
 
@@ -65,9 +65,9 @@ export const analyzeDayOfWeekPatterns = (transactions: Transaction[]): DayPatter
     insights.push({
       type: "pattern" as const,
       priority: "high" as const,
-      title: "Weekend Spending Spike Detected",
-      message: `Weekend spending is ${difference}% higher than weekdays (R$${weekendAvg.toLocaleString()} vs R$${weekdayAvg.toLocaleString()})`,
-      action: "Plan weekend budgets or activities to control spending",
+      title: "Pico de Gastos no Fim de Semana Detectado",
+      message: `Os gastos de fim de semana são ${difference}% maiores que em dias úteis (R$${weekendAvg.toLocaleString("pt-BR")} vs R$${weekdayAvg.toLocaleString("pt-BR")})`,
+      action: "Planeje o orçamento ou as atividades de fim de semana para controlar os gastos",
     });
   }
 
@@ -128,7 +128,7 @@ export const detectSpendingAnomalies = (transactions: Transaction[]): Insight[] 
     const percentDiff = (((amount - avg) / avg) * 100).toFixed(0);
 
     const monthDate = new Date(`${month}-01`);
-    const monthName = monthDate.toLocaleDateString("en-US", {
+    const monthName = monthDate.toLocaleDateString("pt-BR", {
       month: "long",
       year: "numeric",
     });
@@ -137,9 +137,9 @@ export const detectSpendingAnomalies = (transactions: Transaction[]): Insight[] 
       insights.push({
         type: "anomaly" as const,
         priority: "high" as const,
-        title: `Unusual Spending in ${monthName}`,
-        message: `Spending was ${percentDiff}% higher than average (R$${amount.toLocaleString()} vs R$${avg.toLocaleString()})`,
-        action: "Review large expenses in this month",
+        title: `Gasto Incomum em ${monthName}`,
+        message: `O gasto foi ${percentDiff}% maior que a média (R$${amount.toLocaleString("pt-BR")} vs R$${avg.toLocaleString("pt-BR")})`,
+        action: "Revise as despesas grandes nesse mês",
       });
     }
   });
@@ -163,9 +163,9 @@ export const detectSpendingAnomalies = (transactions: Transaction[]): Insight[] 
       insights.push({
         type: "trend" as const,
         priority: "medium" as const,
-        title: `${category} Spending Trending Up`,
-        message: `Last 3 months average is ${increase}% higher (R$${recentAvg.toLocaleString()} vs R$${historicalAvg.toLocaleString()})`,
-        action: `Review ${category} expenses and identify unnecessary costs`,
+        title: `Gastos com ${category} em Alta`,
+        message: `A média dos últimos 3 meses está ${increase}% maior (R$${recentAvg.toLocaleString("pt-BR")} vs R$${historicalAvg.toLocaleString("pt-BR")})`,
+        action: `Revise as despesas de ${category} e identifique custos desnecessários`,
       });
     }
   });
@@ -198,18 +198,18 @@ export const analyzeSeasonalPatterns = (transactions: Transaction[]): SeasonalDa
   if (seasonalAnalysis.hasSeasonality) {
     // Find peak months
     const monthNames = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
+      "Janeiro",
+      "Fevereiro",
+      "Março",
+      "Abril",
+      "Maio",
+      "Junho",
+      "Julho",
+      "Agosto",
+      "Setembro",
+      "Outubro",
+      "Novembro",
+      "Dezembro",
     ];
 
     const peakMonths = Object.entries(seasonalAnalysis.indices)
@@ -226,9 +226,9 @@ export const analyzeSeasonalPatterns = (transactions: Transaction[]): SeasonalDa
       insights.push({
         type: "seasonal" as const,
         priority: "high" as const,
-        title: `${topPeak.month} is Historically High Spending`,
-        message: `Spending is typically ${topPeak.percent}% above average in ${topPeak.month}`,
-        action: `Budget R$${((seasonalAnalysis.overallAverage || 0) * topPeak.index).toLocaleString()} for ${topPeak.month}`,
+        title: `${topPeak.month} Tem Historicamente Gastos Altos`,
+        message: `Os gastos costumam ficar ${topPeak.percent}% acima da média em ${topPeak.month}`,
+        action: `Reserve R$${((seasonalAnalysis.overallAverage || 0) * topPeak.index).toLocaleString("pt-BR")} para ${topPeak.month}`,
       });
     }
 
@@ -247,9 +247,9 @@ export const analyzeSeasonalPatterns = (transactions: Transaction[]): SeasonalDa
       insights.push({
         type: "seasonal" as const,
         priority: "low" as const,
-        title: `${topLow.month} Shows Lower Spending`,
-        message: `Historically ${topLow.percent}% below average - good for savings`,
-        action: "Consider extra savings or debt payments in this month",
+        title: `${topLow.month} Tem Gastos Mais Baixos`,
+        message: `Historicamente ${topLow.percent}% abaixo da média - bom para poupar`,
+        action: "Considere poupar mais ou quitar dívidas nesse mês",
       });
     }
   }
@@ -305,17 +305,17 @@ export const generateBudgetForecastAlerts = (
       insights.push({
         type: "budget-alert" as const,
         priority: "high" as const,
-        title: `${category} Budget at Risk`,
-        message: `On track to exceed budget by R$${projectedOverrun.toLocaleString()} (${overrunPercent}%)`,
-        action: `Reduce daily spending to R$${(remaining / daysRemaining).toLocaleString()} or less`,
+        title: `Orçamento de ${category} em Risco`,
+        message: `No ritmo atual, o orçamento será estourado em R$${projectedOverrun.toLocaleString("pt-BR")} (${overrunPercent}%)`,
+        action: `Reduza o gasto diário para R$${(remaining / daysRemaining).toLocaleString("pt-BR")} ou menos`,
       });
     } else if (spent > budget * 0.8 && spent < budget) {
       insights.push({
         type: "budget-warning" as const,
         priority: "medium" as const,
-        title: `${category} Budget 80% Used`,
-        message: `R$${remaining.toLocaleString()} remaining for ${daysRemaining} days`,
-        action: `Limit to R$${(remaining / daysRemaining).toLocaleString()}/day`,
+        title: `Orçamento de ${category} com 80% Utilizado`,
+        message: `Restam R$${remaining.toLocaleString("pt-BR")} para ${daysRemaining} dias`,
+        action: `Limite-se a R$${(remaining / daysRemaining).toLocaleString("pt-BR")}/dia`,
       });
     }
   });

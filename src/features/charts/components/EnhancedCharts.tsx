@@ -87,7 +87,7 @@ export const EnhancedTopExpenseCategoriesChart = ({
             return "Todo o Período";
           }
           if (viewMode === "year") {
-            return `Year ${currentYear}`;
+            return `Ano ${currentYear}`;
           }
           return `${monthNames[currentMonth - 1]} ${currentYear}`;
         })()}
@@ -104,7 +104,7 @@ export const EnhancedTopExpenseCategoriesChart = ({
         }.png`}
       />
 
-      <div className="text-sm text-gray-400 mb-4">{timeFilteredData.length} expenses</div>
+      <div className="text-sm text-gray-400 mb-4">{timeFilteredData.length} gastos</div>
 
       <div className="flex-grow">
         <Bar ref={chartRef} data={chartData} options={commonChartOptions} />
@@ -150,7 +150,7 @@ export const EnhancedTopIncomeSourcesChart = ({ filteredData, chartRef }: Enhanc
       labels: sorted.map(([category]) => truncateLabel(category, 10)),
       datasets: [
         {
-          label: "Income",
+          label: "Ganhos",
           data: sorted.map(([, amount]) => amount),
           backgroundColor: "#10b981",
           borderRadius: 8,
@@ -169,7 +169,7 @@ export const EnhancedTopIncomeSourcesChart = ({ filteredData, chartRef }: Enhanc
             return "Todo o Período";
           }
           if (viewMode === "year") {
-            return `Year ${currentYear}`;
+            return `Ano ${currentYear}`;
           }
           return `${monthNames[currentMonth - 1]} ${currentYear}`;
         })()}
@@ -186,7 +186,7 @@ export const EnhancedTopIncomeSourcesChart = ({ filteredData, chartRef }: Enhanc
         }.png`}
       />
 
-      <div className="text-sm text-gray-400 mb-4">{timeFilteredData.length} income entries</div>
+      <div className="text-sm text-gray-400 mb-4">{timeFilteredData.length} entrada de renda</div>
 
       <div className="flex-grow">
         <Bar ref={chartRef} data={chartData} options={commonChartOptions} />

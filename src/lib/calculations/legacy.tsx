@@ -547,7 +547,7 @@ export const detectAnomalies = (transactions, sensitivity = 2) => {
         severity,
         message: `${amount.toFixed(0)} is ${(((amount - mean) / mean) * 100).toFixed(
           0
-        )}% above média`,
+        )}% acima média`,
       };
     })
     .sort((a, b) => Math.abs(b.amount) - Math.abs(a.amount));
