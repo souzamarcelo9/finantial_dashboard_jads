@@ -125,8 +125,8 @@ const analyzeSavingsRate = (
       type: "achievement",
       priority: "positive",
       icon: "🎉",
-      title: "Excellent Savings Rate!",
-      message: `You're saving ${savingsRate.toFixed(1)}% of your income - that's excellent! Keep it up!`,
+      title: "Excelente taxa de poupança!",
+      message: `Você está economizando ${savingsRate.toFixed(1)}% da sua renda - isto é ótimo! Mantenha assim!`,
       actionable: false,
     };
   }
@@ -136,8 +136,8 @@ const analyzeSavingsRate = (
       type: "warning",
       priority: "high",
       icon: "⚠️",
-      title: "Low Savings Rate",
-      message: `You're only saving ${savingsRate.toFixed(1)}% of income. Aim for at least 20% for financial health.`,
+      title: "Baixa taxa de poupança",
+      message: `Você está economizando ${savingsRate.toFixed(1)}% dos ganhos. Tente manter ao menos 20% para ter saúde financeira.`,
       actionable: true,
     };
   }

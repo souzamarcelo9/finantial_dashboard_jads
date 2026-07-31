@@ -1233,7 +1233,7 @@ export const calculateCommuteMetrics = (transactions) => {
 
   if (topMode) {
     insights.push({
-      title: "Primary Transport Mode",
+      title: "Tipo principal de transporte",
       message: `${topMode.name}: R$${topMode.amount.toLocaleString()}`,
       priority: "info",
     });
