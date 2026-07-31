@@ -3,12 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@11.17.0",
-  "homepage": "https://sagargupta16.github.io/Financial-Dashboard",
+  "homepage": "https://github.com/souzamarcelo9/finantial_dashboard_jads",
   "engines": {
     "node": ">=20.0.0",
-    "pnpm": ">=9.0.0",
-    "npm": "please-use-pnpm",
-    "yarn": "please-use-pnpm"
+    "pnpm": ">=9.0.0"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
