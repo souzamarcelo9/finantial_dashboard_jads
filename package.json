@@ -29,7 +29,8 @@
     "tailwind-merge": "^3.4.0",
     "tailwindcss-animate": "^1.0.7",
     "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz",
-    "zustand": "^5.0.9"
+    "zustand": "^5.0.9",
+    "serve": "^14.2.4"
   },
   "scripts": {
     "dev": "vite",
@@ -44,7 +45,8 @@
     "check:fix": "biome check --write ./src",
     "type-check": "tsc --noEmit",
     "test:run": "echo 'No tests configured yet - Phase 8 pending'",
-    "prepare": "husky"
+    "prepare": "husky",
+    "start": "serve -s dist -l ${PORT:-3000}"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.11",

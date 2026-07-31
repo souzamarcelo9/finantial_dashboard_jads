@@ -8,45 +8,29 @@ import { LoadingSpinner } from "./components/ui/Loading";
 import { AuthProvider } from "./context/AuthContext";
 
 // Create router configuration
-const router = createBrowserRouter(
-  [
-    {
-      path: "/Financial-Dashboard",
-      element: (
-        <EnhancedErrorBoundary>
-          <App />
-        </EnhancedErrorBoundary>
-      ),
-      errorElement: (
-        <EnhancedErrorBoundary>
-          <div className="flex items-center justify-center min-h-screen bg-gray-900">
-            <div className="text-center text-white">
-              <h1 className="text-4xl font-bold mb-4">404</h1>
-              <p className="text-gray-400">Page not found</p>
-              <a
-                href="/Financial-Dashboard"
-                className="text-blue-500 hover:text-blue-400 mt-4 inline-block"
-              >
-                Go back home
-              </a>
-            </div>
-          </div>
-        </EnhancedErrorBoundary>
-      ),
-    },
-    {
-      path: "/",
-      element: (
-        <EnhancedErrorBoundary>
-          <App />
-        </EnhancedErrorBoundary>
-      ),
-    },
-  ],
+const router = createBrowserRouter([
   {
-    basename: "/Financial-Dashboard/",
-  }
-);
+    path: "/",
+    element: (
+      <EnhancedErrorBoundary>
+        <App />
+      </EnhancedErrorBoundary>
+    ),
+    errorElement: (
+      <EnhancedErrorBoundary>
+        <div className="flex items-center justify-center min-h-screen bg-gray-900">
+          <div className="text-center text-white">
+            <h1 className="text-4xl font-bold mb-4">404</h1>
+            <p className="text-gray-400">Página não encontrada</p>
+            <a href="/" className="text-blue-500 hover:text-blue-400 mt-4 inline-block">
+              Voltar ao início
+            </a>
+          </div>
+        </div>
+      </EnhancedErrorBoundary>
+    ),
+  },
+]);
 
 const rootElement = document.getElementById("root");
 

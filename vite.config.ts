@@ -108,8 +108,9 @@ export default defineConfig(async () => {
       overlay: true,
     },
   },
-  // For GitHub Pages deployment
-  base: '/Financial-Dashboard/',
+  // Servido na raiz do domínio (Heroku); use um subcaminho aqui apenas
+  // se for hospedar em algo como GitHub Pages sob um subdiretório.
+  base: '/',
   // Optimize dependencies
   optimizeDeps: {
     include: [
