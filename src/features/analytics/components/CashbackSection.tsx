@@ -116,7 +116,7 @@ export const CashbackSection = ({
                 <div>
                   <div className="text-white font-medium">{card.card}</div>
                   <div className="text-gray-400 text-sm">
-                    {card.cashbackRate.toFixed(2)}% cashback rate
+                    {card.cashbackRate.toFixed(2)}% cashback taxa
                   </div>
                 </div>
                 <div className="text-right">
@@ -124,7 +124,7 @@ export const CashbackSection = ({
                     R${card.cashback.toLocaleString("pt-BR")}
                   </div>
                   <div className="text-gray-400 text-sm">
-                    R${card.spending.toLocaleString("pt-BR")} spent
+                    R${card.spending.toLocaleString("pt-BR")} gasto
                   </div>
                 </div>
               </div>

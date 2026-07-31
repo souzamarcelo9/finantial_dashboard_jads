@@ -257,7 +257,7 @@ export const BudgetPlanner = ({ filteredData }: BudgetPlannerProps) => {
                       </span>
                     )}
                     <span className="text-white text-sm font-medium">
-                      Spent: R${actual.toLocaleString()}
+                      Gasto: R${actual.toLocaleString()}
                     </span>
                   </div>
                 </div>
