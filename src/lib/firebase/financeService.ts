@@ -79,7 +79,10 @@ const requireUserId = (): string => {
 export const saveTransaction = async (transaction: Transaction): Promise<void> => {
   if (!isFirebaseConfigured() || !db) return;
   const userId = requireUserId();
-  const ref = doc(db, TRANSACTIONS_COLLECTION, transaction.id);
+  // O Firestore exige que o ID do documento seja uma string — forçamos isso
+  // aqui como proteção extra, caso algum fluxo (import, migração, etc.)
+  // gere um id numérico.
+  const ref = doc(db, TRANSACTIONS_COLLECTION, String(transaction.id));
   await setDoc(ref, {
     ...toPlainTransaction(transaction, userId),
     updatedAt: serverTimestamp(),
@@ -96,7 +99,7 @@ export const saveTransactionsBulk = async (transactions: Transaction[]): Promise
 export const deleteTransaction = async (id: string): Promise<void> => {
   if (!isFirebaseConfigured() || !db) return;
   requireUserId();
-  await deleteDoc(doc(db, TRANSACTIONS_COLLECTION, id));
+  await deleteDoc(doc(db, TRANSACTIONS_COLLECTION, String(id)));
 };
 
 /** Busca todos os lançamentos do usuário autenticado (uma vez) */

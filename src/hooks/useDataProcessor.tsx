@@ -139,7 +139,7 @@ const createNewFormatItem = (row, index) => {
   logger.debug(`Row ${index} parsed date:`, parsedDate);
 
   const item = {
-    id: index,
+    id: `import-${Date.now()}-${index}`,
     date: parsedDate,
     time: timeStr,
     account: cleanColumn(row[1]),
@@ -158,7 +158,7 @@ const createNewFormatItem = (row, index) => {
 const createOldFormatItem = (row, index) => {
   logger.debug(`Row ${index} is old format`);
   return {
-    id: index,
+    id: `import-${Date.now()}-${index}`,
     date: parseDate(cleanColumn(row[0]), cleanColumn(row[1])),
     time: cleanColumn(row[1]),
     account: cleanColumn(row[2]),
@@ -180,15 +180,13 @@ const isValidItem = (item) => {
 
 // Helper function: Detect Excel data format
 const detectExcelFormat = (header) => {
-  const hasPeriod = header.some((h) => h?.includes("period") || h?.includes("date"));
-  const hasTime = header.some((h) => h?.includes("time"));
+  const hasPeriod = header.some((h) => h?.includes("period"));
   const hasAccounts = header.some((h) => h?.includes("account"));
   const hasCategory = header.some((h) => h?.includes("category"));
-  const isNewFormat = (hasPeriod || hasTime) && hasAccounts && hasCategory;
+  const isNewFormat = hasPeriod && hasAccounts && hasCategory;
 
   logger.debug("Format detection:", {
     hasPeriod,
-    hasTime,
     hasAccounts,
     hasCategory,
     isNewFormat,
@@ -259,7 +257,11 @@ export const useDataProcessor = (initialCsvData) => {
     logger.debug("Starting Excel parsing...");
     try {
       // Read the workbook from array buffer
-      const workbook = XLSX.read(arrayBuffer, { type: "array" });
+      // Converte para Uint8Array antes de entregar ao SheetJS: alguns builds
+      // da biblioteca esperam um typed array (com métodos como .indexOf) e
+      // falham silenciosamente ou com erro interno ao receber um
+      // ArrayBuffer puro (que não tem esses métodos).
+      const workbook = XLSX.read(new Uint8Array(arrayBuffer), { type: "array" });
       logger.debug("Workbook loaded:", workbook.SheetNames);
 
       // Get the first worksheet

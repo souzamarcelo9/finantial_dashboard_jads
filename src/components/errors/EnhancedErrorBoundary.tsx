@@ -42,10 +42,9 @@ class EnhancedErrorBoundary extends React.Component<
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    // Log error to console in development
-    if (import.meta.env.MODE === "development") {
-      console.error("Error caught by boundary:", error, errorInfo);
-    }
+    // Sempre loga no console — em produção isso é a única forma de
+    // diagnosticar um erro sem precisar reproduzir localmente.
+    console.error("Error caught by boundary:", error, errorInfo);
 
     // Update state with error details
     this.setState((prevState) => ({

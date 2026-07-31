@@ -115,7 +115,12 @@ export const useFinancialStore = create<FinancialStore>()(
                 transactionCount: transactions.length,
               })
             )
-            .catch((err) => set({ error: (err as Error).message }))
+            .catch((err) => {
+              console.error("Erro ao sincronizar com o Firebase:", err);
+              console.error("Erro ao sincronizar com o Firebase:", err);
+            console.error("Erro ao sincronizar com o Firebase:", err);
+          set({ error: (err as Error).message });
+            })
             .finally(() => set({ syncing: false }));
         }
       },
@@ -132,7 +137,9 @@ export const useFinancialStore = create<FinancialStore>()(
               transactionCount: 1,
             });
           } catch (err) {
-            set({ error: (err as Error).message });
+            console.error("Erro ao sincronizar com o Firebase:", err);
+            console.error("Erro ao sincronizar com o Firebase:", err);
+          set({ error: (err as Error).message });
           } finally {
             set({ syncing: false });
           }
@@ -149,7 +156,9 @@ export const useFinancialStore = create<FinancialStore>()(
           try {
             await fbSaveTransaction(transaction);
           } catch (err) {
-            set({ error: (err as Error).message });
+            console.error("Erro ao sincronizar com o Firebase:", err);
+            console.error("Erro ao sincronizar com o Firebase:", err);
+          set({ error: (err as Error).message });
           }
         }
       },
@@ -160,7 +169,9 @@ export const useFinancialStore = create<FinancialStore>()(
           try {
             await fbDeleteTransaction(id);
           } catch (err) {
-            set({ error: (err as Error).message });
+            console.error("Erro ao sincronizar com o Firebase:", err);
+            console.error("Erro ao sincronizar com o Firebase:", err);
+          set({ error: (err as Error).message });
           }
         }
       },
@@ -174,6 +185,7 @@ export const useFinancialStore = create<FinancialStore>()(
             set({ transactions: remote });
           }
         } catch (err) {
+          console.error("Erro ao sincronizar com o Firebase:", err);
           set({ error: (err as Error).message });
         } finally {
           set({ loading: false });
@@ -196,6 +208,7 @@ export const useFinancialStore = create<FinancialStore>()(
           });
           await get().loadBaselines();
         } catch (err) {
+          console.error("Erro ao sincronizar com o Firebase:", err);
           set({ error: (err as Error).message });
         }
       },
@@ -205,6 +218,7 @@ export const useFinancialStore = create<FinancialStore>()(
           const baselines = await fetchBaselines();
           set({ baselines });
         } catch (err) {
+          console.error("Erro ao sincronizar com o Firebase:", err);
           set({ error: (err as Error).message });
         }
       },
@@ -214,6 +228,7 @@ export const useFinancialStore = create<FinancialStore>()(
           const history = await fetchHistory();
           set({ history });
         } catch (err) {
+          console.error("Erro ao sincronizar com o Firebase:", err);
           set({ error: (err as Error).message });
         }
       },
