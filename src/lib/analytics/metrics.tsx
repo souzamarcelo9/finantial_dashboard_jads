@@ -45,7 +45,7 @@ export const getSavingsRateMessage = (rate: number): string => {
   if (rate >= 10) {
     return "Good, aim for 20%+";
   }
-  return "Meta: 20%+";
+  return "Target: 20%+";
 };
 
 /**
@@ -202,7 +202,7 @@ export const getMonthlyTrendDisplay = (monthlyComparison: {
   avgGrowth?: number;
 }) => {
   if (!monthlyComparison?.trend || monthlyComparison.avgGrowth === undefined) {
-    return "Nenhum dado de tendência";
+    return "Sem dados de tendência";
   }
   if (monthlyComparison.trend === "increasing") {
     return `↗️ +${monthlyComparison.avgGrowth.toFixed(1)}% MoM`;
@@ -221,9 +221,9 @@ export const getMonthlyTrendDisplay = (monthlyComparison: {
 export const getAnomalyAlertDisplay = (anomaliesCount: number) => {
   if (anomaliesCount > 0) {
     const plural = anomaliesCount > 1 ? "s" : "";
-    return `${anomaliesCount} unusual transaction${plural}`;
+    return `${anomaliesCount} lançamento${plural} incomum(uns)`;
   }
-  return "✓ Tudo ok";
+  return "✓ Tudo normal";
 };
 
 /**
@@ -244,7 +244,7 @@ export const getSubscriptionsDisplay = (
   const activeSubscriptions = recurringTransactions.filter((t) => t.isActive);
 
   if (activeSubscriptions.length === 0) {
-    return "Nenhuma ativada";
+    return "Nenhuma ativa";
   }
 
   // Calculate total monthly cost using monthlyEquivalent
@@ -253,7 +253,7 @@ export const getSubscriptionsDisplay = (
   const count = activeSubscriptions.length;
   const plural = count > 1 ? "s" : "";
 
-  return `${count} active subscription${plural} (${formatCurrency(totalMonthly)}/mo)`;
+  return `${count} assinatura${plural} ativa${plural} (${formatCurrency(totalMonthly)}/mês)`;
 };
 
 /**
@@ -319,18 +319,18 @@ export const getYearsAndMonths = (transactions: any[]) => {
 
   const sortedYears = Array.from(yearSet).sort((a, b) => (b as number) - (a as number));
   const monthLabels = [
-    { value: "0", label: "January" },
-    { value: "1", label: "February" },
-    { value: "2", label: "March" },
-    { value: "3", label: "April" },
-    { value: "4", label: "May" },
-    { value: "5", label: "June" },
-    { value: "6", label: "July" },
-    { value: "7", label: "August" },
-    { value: "8", label: "September" },
-    { value: "9", label: "October" },
-    { value: "10", label: "November" },
-    { value: "11", label: "December" },
+    { value: "0", label: "Janeiro" },
+    { value: "1", label: "Fevereiro" },
+    { value: "2", label: "Março" },
+    { value: "3", label: "Abril" },
+    { value: "4", label: "Maio" },
+    { value: "5", label: "Junho" },
+    { value: "6", label: "Julho" },
+    { value: "7", label: "Agosto" },
+    { value: "8", label: "Setembro" },
+    { value: "9", label: "Outubro" },
+    { value: "10", label: "Novembro" },
+    { value: "11", label: "Dezembro" },
   ];
 
   return { sortedYears, monthLabels };

@@ -5,6 +5,39 @@
 import type { TransactionType } from "../../types";
 
 /**
+ * Traduz os "status" e "ratings" internos calculados pelo motor de análise
+ * (trend, cashFlowForecast.status, incomeStability.rating, month.status)
+ * APENAS para exibição. Os valores internos continuam em inglês, pois são
+ * usados em comparações (`=== "stable"`) em vários pontos do código —
+ * nunca use o retorno desta função para lógica, só para exibir na tela.
+ * @example
+ * translateStatusLabel("declining") // "Em Declínio"
+ */
+export const translateStatusLabel = (status: string | undefined | null): string => {
+  if (!status) {
+    return "N/A";
+  }
+  const map: Record<string, string> = {
+    stable: "Estável",
+    Stable: "Estável",
+    "Very Stable": "Muito Estável",
+    Moderate: "Moderado",
+    Volatile: "Volátil",
+    increasing: "Em Alta",
+    decreasing: "Em Queda",
+    growing: "Crescendo",
+    declining: "Em Declínio",
+    healthy: "Saudável",
+    deficit: "Déficit",
+    tight: "Apertado",
+    over: "Acima do Orçamento",
+    under: "Dentro do Orçamento",
+    warning: "Atenção",
+  };
+  return map[status] ?? status;
+};
+
+/**
  * Traduz o tipo de lançamento (valor interno em inglês) para um rótulo em
  * português, apenas para exibição. NUNCA usar o valor de retorno para
  * comparações — o modelo de dados continua em inglês (Income/Expense/...).

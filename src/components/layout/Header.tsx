@@ -1,5 +1,7 @@
-import { FileSpreadsheet, TrendingUp, Upload } from "lucide-react";
+import { FileSpreadsheet, LogOut, TrendingUp, Upload } from "lucide-react";
 import type React from "react";
+import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 import { ManualEntryModal } from "../../features/transactions/components/ManualEntryModal";
 import { useFirebaseEnabled, useSyncing } from "../../store/financialStore";
 
@@ -10,6 +12,17 @@ interface HeaderProps {
 export const Header = ({ onFileUpload }: HeaderProps) => {
   const firebaseEnabled = useFirebaseEnabled();
   const syncing = useSyncing();
+  const { user, logout } = useAuth();
+  const [loggingOut, setLoggingOut] = useState(false);
+
+  const handleLogout = async () => {
+    setLoggingOut(true);
+    try {
+      await logout();
+    } finally {
+      setLoggingOut(false);
+    }
+  };
 
   return (
     <header className="mb-8 bg-gray-800/40 border border-gray-700/30 rounded-2xl p-6 sm:p-8">
@@ -47,7 +60,7 @@ export const Header = ({ onFileUpload }: HeaderProps) => {
           </div>
         </div>
 
-        <div className="mt-6 sm:mt-0 flex flex-wrap gap-3">
+        <div className="mt-6 sm:mt-0 flex flex-wrap items-center gap-3">
           <ManualEntryModal />
 
           <label
@@ -79,6 +92,24 @@ export const Header = ({ onFileUpload }: HeaderProps) => {
             className="hidden"
             onChange={onFileUpload}
           />
+
+          {user && (
+            <div className="flex items-center gap-2 pl-2 ml-1 border-l border-gray-700">
+              <span className="text-sm text-gray-400 hidden sm:inline max-w-[160px] truncate">
+                {user.displayName || user.email}
+              </span>
+              <button
+                type="button"
+                onClick={handleLogout}
+                disabled={loggingOut}
+                title="Sair"
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm text-gray-300 hover:text-white hover:bg-gray-700/60 transition-colors disabled:opacity-50"
+              >
+                <LogOut size={16} />
+                <span className="hidden sm:inline">Sair</span>
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </header>

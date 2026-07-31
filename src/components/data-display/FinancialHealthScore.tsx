@@ -6,6 +6,27 @@ import {
 } from "../../features/budget/utils/budgetUtils";
 import { getGradient, getScoreColor, prepareHealthData } from "../../lib/analytics/healthScore";
 
+/**
+ * Traduz a variância de gastos (mesma métrica usada por `scoreConsistency`
+ * em lib/calculations) para um rótulo em português, usando os mesmos
+ * limiares da pontuação — assim o texto sempre bate com a nota exibida.
+ */
+const getConsistencyLabel = (variance: number | undefined): string => {
+  if (variance === undefined || variance === null || Number.isNaN(variance)) {
+    return "Moderado";
+  }
+  if (variance <= 15) {
+    return "Muito Consistente";
+  }
+  if (variance <= 25) {
+    return "Consistente";
+  }
+  if (variance <= 35) {
+    return "Moderado";
+  }
+  return "Irregular";
+};
+
 interface ScoreDisplayProps {
   score?: {
     score?: number;
@@ -151,7 +172,7 @@ export const FinancialHealthScore = ({
                 R${Number.parseInt(score?.emergencyFundAmount || 0, 10).toLocaleString("pt-BR")} / R$
                 {Number.parseInt(score?.averageMonthlyExpenses || 0, 10).toLocaleString("pt-BR")}
               </p>
-              <p className="text-gray-500 text-xs">Dinheiro / Média Mensal</p>
+              <p className="text-gray-500 text-xs">Cash / Média Mensal</p>
               <div className="mt-2 h-2 bg-gray-600 rounded-full overflow-hidden">
                 <div
                   className="h-full bg-gradient-to-r from-green-600 to-blue-600"
@@ -178,7 +199,7 @@ export const FinancialHealthScore = ({
               <p className="text-xl font-bold text-blue-400 mt-1">
                 R${Number.parseInt(score?.totalInvestments || 0, 10).toLocaleString("pt-BR")}
               </p>
-              <p className="text-gray-400 text-xs mt-1">MF,Ações</p>
+              <p className="text-gray-400 text-xs mt-1">MF, Ações</p>
             </div>
 
             <div className="bg-gray-700/50 rounded-lg p-3">
@@ -195,7 +216,7 @@ export const FinancialHealthScore = ({
                 R${Number.parseInt(score?.totalDebt || 0, 10).toLocaleString("pt-BR")}
               </p>
               <p className="text-gray-400 text-xs mt-1">
-                {Number.parseFloat(score?.debtToIncomeRatio || 0).toFixed(1)}% da renda
+                {Number.parseFloat(score?.debtToIncomeRatio || 0).toFixed(1)}% de ganhos
               </p>
             </div>
           </div>
@@ -216,17 +237,17 @@ export const FinancialHealthScore = ({
                       consistency: {
                         max: 15,
                         label: "Consistência de Gastos",
-                        detail: "Moderado",
+                        detail: getConsistencyLabel(score?.details?.spendingVariance),
                       },
                       emergencyFund: {
                         max: 25,
                         label: "Reserva de Emergência",
-                        detail: `${score?.monthsCovered || 0} months`,
+                        detail: `${score?.monthsCovered || 0} meses`,
                       },
-                      ratio: {
+                      incomeExpenseRatio: {
                         max: 15,
                         label: "Relação Receita/Despesa",
-                        detail: `${score?.details?.ratio?.toFixed(2) || 1}x`,
+                        detail: `${score?.incomeExpenseRatio || 1}x`,
                       },
                       categoryBalance: {
                         max: 10,
@@ -285,7 +306,7 @@ export const FinancialHealthScore = ({
       {/* Recommendations */}
       {recommendations.length > 0 && (
         <div className="mt-6 pt-6 border-t border-gray-700">
-          <h3 className="text-lg font-semibold text-white mb-4">Recomendações</h3>
+          <h3 className="text-lg font-semibold text-white mb-4">Recommendações</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {recommendations.map((rec: RecommendationCardProps["rec"], index: number) => (
               <RecommendationCard

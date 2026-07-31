@@ -21,8 +21,11 @@ import { Header } from "../components/layout/Header";
 import { CustomTabs, TabContent } from "../components/ui/CustomTabs";
 import { LoadingSpinner } from "../components/ui/Loading";
 import { SectionSkeleton } from "../components/ui/SectionSkeleton";
+import { LoginScreen } from "../components/auth/LoginScreen";
 // Config
 import { TABS_CONFIG } from "../config/tabs";
+// Auth
+import { useAuth } from "../context/AuthContext";
 // Utils
 import { initialCsvData } from "../constants/index";
 // Hooks
@@ -35,6 +38,7 @@ import {
   useSetLoading,
   useSetTransactions,
   useTransactions,
+  useFinancialStore,
 } from "../store/financialStore";
 import type { SortConfig, TransactionSortKey } from "../types";
 import { lazyLoad } from "../utils/lazyLoad";
@@ -116,6 +120,8 @@ type ChartRefKey =
 type ChartRefMap = Record<ChartRefKey, RefObject<ChartJS | null>>;
 
 const App = () => {
+  const { user, loading: authLoading, firebaseEnabled } = useAuth();
+
   // State
   const [activeTab, setActiveTab] = useState<string>("overview");
   const [sortConfig, setSortConfig] = useState<SortConfig<TransactionSortKey>>({
@@ -155,12 +161,20 @@ const App = () => {
   const error = useError();
   const setError = useSetError();
   const loadFromFirebase = useLoadFromFirebase();
+  const resetStore = useFinancialStore((state) => state.reset);
 
-  // Carrega lançamentos salvos no Firebase (se configurado) ao iniciar
+  // Carrega os lançamentos do usuário autenticado ao logar; limpa tudo ao deslogar
   useEffect(() => {
-    loadFromFirebase();
+    if (!firebaseEnabled) {
+      return;
+    }
+    if (user) {
+      loadFromFirebase();
+    } else {
+      resetStore();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [user, firebaseEnabled]);
 
   // Custom hooks
   const {
@@ -217,6 +231,20 @@ const App = () => {
     }));
     setCurrentPage(1); // Reset to first page when sorting
   };
+
+  // Autenticação: aguarda o Firebase confirmar se há sessão ativa
+  if (firebaseEnabled && authLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen bg-gray-900 text-white">
+        <LoadingSpinner size="xl" message="Verificando sua sessão..." />
+      </div>
+    );
+  }
+
+  // Autenticação: exige login quando o Firebase está configurado
+  if (firebaseEnabled && !user) {
+    return <LoginScreen />;
+  }
 
   // Loading and error states
   if (loading) {

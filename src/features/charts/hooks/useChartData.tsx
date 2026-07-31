@@ -27,7 +27,7 @@ export const useChartData = (
 
   const doughnutChartData = useMemo(
     () => ({
-      labels: ["Income", "Expense"],
+      labels: ["Receita", "Despesa"],
       datasets: [
         {
           data: [kpiData.income, kpiData.expense],
@@ -158,7 +158,7 @@ export const useChartData = (
       labels: sortedMonths.map(formatMonthLabel),
       datasets: [
         {
-          label: "Ganhos",
+          label: "Income",
           data: sortedMonths.map((m) => monthly[m].income),
           borderColor: "#22c55e",
           backgroundColor: "#22c55e",
@@ -166,7 +166,7 @@ export const useChartData = (
           fill: false,
         },
         {
-          label: "Gastos",
+          label: "Expense",
           data: sortedMonths.map((m) => monthly[m].expense),
           borderColor: "#ef4444",
           backgroundColor: "#ef4444",

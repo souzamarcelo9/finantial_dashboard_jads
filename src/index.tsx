@@ -5,6 +5,7 @@ import "./styles/index.css";
 import App from "./app/App";
 import EnhancedErrorBoundary from "./components/errors/EnhancedErrorBoundary";
 import { LoadingSpinner } from "./components/ui/Loading";
+import { AuthProvider } from "./context/AuthContext";
 
 // Create router configuration
 const router = createBrowserRouter(
@@ -56,8 +57,10 @@ if (!rootElement) {
 const root = ReactDOM.createRoot(rootElement);
 root.render(
   <StrictMode>
-    <Suspense fallback={<LoadingSpinner />}>
-      <RouterProvider router={router} />
-    </Suspense>
+    <AuthProvider>
+      <Suspense fallback={<LoadingSpinner />}>
+        <RouterProvider router={router} />
+      </Suspense>
+    </AuthProvider>
   </StrictMode>
 );

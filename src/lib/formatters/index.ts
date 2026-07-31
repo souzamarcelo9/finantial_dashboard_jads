@@ -39,6 +39,7 @@ export {
   capitalize,
   pluralize,
   toTitleCase,
+  translateStatusLabel,
   translateTransactionType,
   truncateLabel,
   truncateText,

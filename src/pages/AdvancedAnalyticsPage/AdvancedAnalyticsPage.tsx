@@ -8,6 +8,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { useAdvancedAnalytics } from "../../features/analytics/hooks/useAdvancedAnalytics";
+import { translateStatusLabel } from "../../lib/formatters";
 
 /**
  * Advanced Analytics Dashboard Component
@@ -55,7 +56,7 @@ export const AdvancedAnalyticsDashboard = ({ filteredData }) => {
             )}
           </div>
           <div className="text-2xl font-bold text-white">
-            {analytics.monthlyComparison?.trend || "Estável"}
+            {translateStatusLabel(analytics.monthlyComparison?.trend) || "Estável"}
           </div>
           <div className="text-sm text-gray-400">
             {analytics.monthlyComparison?.avgGrowth > 0 ? "+" : ""}
@@ -110,10 +111,10 @@ export const AdvancedAnalyticsDashboard = ({ filteredData }) => {
             <DollarSign className="text-green-400" size={20} />
           </div>
           <div className="text-2xl font-bold text-white">
-            {analytics.incomeStability?.rating || "N/A"}
+            {translateStatusLabel(analytics.incomeStability?.rating) || "N/A"}
           </div>
           <div className="text-sm text-gray-400">
-            {((analytics.incomeStability?.stability || 0) * 100).toFixed(0)}% stable
+            {((analytics.incomeStability?.stability || 0) * 100).toFixed(0)}% estável
           </div>
         </div>
       </div>
@@ -123,7 +124,7 @@ export const AdvancedAnalyticsDashboard = ({ filteredData }) => {
         <div className="bg-gray-800/50 rounded-2xl p-6 border border-gray-700/50">
           <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
             <Calendar className="text-purple-400" size={24} />
-            Recurring Subscriptions
+            Assinaturas Recorrentes
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -275,12 +276,12 @@ export const AdvancedAnalyticsDashboard = ({ filteredData }) => {
             })()}
           >
             <p className="text-lg font-medium text-white">
-              Status: <span className="capitalize">{analytics.cashFlowForecast.status}</span>
+              Status: <span>{translateStatusLabel(analytics.cashFlowForecast.status)}</span>
             </p>
             {analytics.cashFlowForecast.daysUntilZero !== Infinity && (
               <p className="text-sm text-gray-300 mt-1">
-                ⚠️ Na taxa atual, o saldo chega a zero em {" "}
-                {Math.floor(analytics.cashFlowForecast.daysUntilZero)} days
+                ⚠️ Na taxa atual, o saldo chega a zero em{" "}
+                {Math.floor(analytics.cashFlowForecast.daysUntilZero)} dia(s)
               </p>
             )}
           </div>
@@ -328,7 +329,7 @@ export const AdvancedAnalyticsDashboard = ({ filteredData }) => {
                 </div>
                 <div className="flex justify-between text-xs text-gray-400 mt-2">
                   <span>{cat.direction}</span>
-                  <span>R${cat.monthlyAverage.toFixed(0)}/month avg</span>
+                  <span>R${cat.monthlyAverage.toFixed(0)}/mês média</span>
                 </div>
               </div>
             ))}
@@ -371,7 +372,7 @@ export const AdvancedAnalyticsDashboard = ({ filteredData }) => {
                     return "text-xs mt-2 font-medium text-red-400";
                   })()}
                 >
-                  {month.status.toUpperCase()}
+                  {translateStatusLabel(month.status).toUpperCase()}
                   {month.surplus > 0 && ` (+R$${month.surplus.toFixed(0)})`}
                 </p>
               </div>
@@ -392,8 +393,8 @@ export const AdvancedAnalyticsDashboard = ({ filteredData }) => {
           </div>
           <div>
             <p className="text-gray-400 text-sm">Status do Fluxo de Caixa</p>
-            <p className="text-2xl font-bold text-white capitalize">
-              {analytics.insights?.cashFlowStatus}
+            <p className="text-2xl font-bold text-white">
+              {translateStatusLabel(analytics.insights?.cashFlowStatus)}
             </p>
           </div>
         </div>

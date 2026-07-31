@@ -334,7 +334,7 @@ export const EnhancedTransactionTable = ({
             <div className="p-3 bg-gradient-to-br from-blue-600/20 to-purple-600/20 rounded-2xl">
               <FileText className="text-blue-400" size={24} />
             </div>
-            <h3 className="text-2xl font-bold text-white">All Transactions</h3>
+            <h3 className="text-2xl font-bold text-white">Lançamentos Financeiros</h3>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
@@ -405,7 +405,7 @@ export const EnhancedTransactionTable = ({
                   className="text-sm font-medium text-gray-300 flex items-center gap-2"
                 >
                   <Calendar size={14} />
-                  Date From
+                  Data De
                 </label>
                 <div className="relative">
                   <input
@@ -432,7 +432,7 @@ export const EnhancedTransactionTable = ({
                   className="text-sm font-medium text-gray-300 flex items-center gap-2"
                 >
                   <Calendar size={14} />
-                  Date To
+                  Data Até
                 </label>
                 <div className="relative">
                   <input
@@ -460,7 +460,7 @@ export const EnhancedTransactionTable = ({
                   className="text-sm font-medium text-gray-300 flex items-center gap-2"
                 >
                   <DollarSign size={14} />
-                  Min Amount
+                  Montante mínimo
                 </label>
                 <div className="relative">
                   <input
@@ -489,7 +489,7 @@ export const EnhancedTransactionTable = ({
                   className="text-sm font-medium text-gray-300 flex items-center gap-2"
                 >
                   <DollarSign size={14} />
-                  Max Amount
+                  Montante máximo
                 </label>
                 <div className="relative">
                   <input
@@ -553,7 +553,7 @@ export const EnhancedTransactionTable = ({
                   className="text-sm font-medium text-gray-300 flex items-center gap-2"
                 >
                   <Tag size={14} />
-                  Category
+                  Categoria
                 </label>
                 <div className="relative">
                   <select
@@ -562,7 +562,7 @@ export const EnhancedTransactionTable = ({
                     onChange={(e) => handleFilterChange("category", e.target.value)}
                     className="w-full px-4 py-3 bg-gray-800/70 backdrop-blur-xl border border-gray-700/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 appearance-none cursor-pointer"
                   >
-                    <option value="">All Categories</option>
+                    <option value="">Todas as categorias</option>
                     {uniqueValues.categories.map((category) => (
                       <option key={category} value={category}>
                         {category}
@@ -587,7 +587,7 @@ export const EnhancedTransactionTable = ({
                   className="text-sm font-medium text-gray-300 flex items-center gap-2"
                 >
                   <Tag size={14} />
-                  Subcategory
+                  Subcategoria
                 </label>
                 <div className="relative">
                   <select
@@ -596,7 +596,7 @@ export const EnhancedTransactionTable = ({
                     onChange={(e) => handleFilterChange("subcategory", e.target.value)}
                     className="w-full px-4 py-3 bg-gray-800/70 backdrop-blur-xl border border-gray-700/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 appearance-none cursor-pointer"
                   >
-                    <option value="">All Subcategories</option>
+                    <option value="">Todas Subcategorias</option>
                     {uniqueValues.subcategories.map((subcategory) => (
                       <option key={subcategory} value={subcategory}>
                         {subcategory}
@@ -655,7 +655,7 @@ export const EnhancedTransactionTable = ({
                   className="text-sm font-medium text-gray-300 flex items-center gap-2"
                 >
                   <FileText size={14} />
-                  Note Contains
+                  Observações
                 </label>
                 <div className="relative">
                   <input
@@ -688,7 +688,7 @@ export const EnhancedTransactionTable = ({
                   </span>
                   {" • "}
                   <span className="text-white">
-                    Showing {filteredData.length} of {data.length} transactions
+                    Exibindo {filteredData.length} of {data.length} transações
                   </span>
                 </p>
               </div>
@@ -851,7 +851,7 @@ export const EnhancedTransactionTable = ({
                 onClick={clearAllFilters}
                 className="mt-4 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold rounded-xl transition-all duration-300 shadow-lg hover:shadow-blue-500/50 hover:scale-105"
               >
-                Clear all filters
+                Limpar todos os filtros
               </button>
             )}
           </div>
@@ -862,7 +862,7 @@ export const EnhancedTransactionTable = ({
       {totalPages > 1 && (
         <div className="flex justify-between items-center p-6 bg-gradient-to-r from-gray-800/60 to-gray-900/60 border-t border-gray-700/50">
           <p className="text-sm font-medium text-gray-300">
-            Showing{" "}
+            Exibindo{" "}
             <span className="font-bold text-white">
               {startIndex + 1}-{Math.min(endIndex, sortedData.length)}
             </span>{" "}
@@ -878,7 +878,7 @@ export const EnhancedTransactionTable = ({
               className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 text-white font-bold transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed hover:shadow-lg hover:scale-105 disabled:hover:scale-100"
             >
               <ChevronLeft size={18} />
-              <span>Previous</span>
+              <span>Anterior</span>
             </button>
             <span className="text-base font-bold text-white px-4">
               Page <span className="text-blue-400">{currentPage}</span> of {totalPages}
@@ -888,7 +888,7 @@ export const EnhancedTransactionTable = ({
               disabled={currentPage === totalPages}
               className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 text-white font-bold transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed hover:shadow-lg hover:scale-105 disabled:hover:scale-100"
             >
-              <span>Next</span>
+              <span>Próximo</span>
               <ChevronRight size={18} />
             </button>
           </div>
